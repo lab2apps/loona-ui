@@ -6,6 +6,8 @@ import type { RootState } from '../../../store/reducers/rootReducer';
 
 import { getUserInfo } from '../../../store/actions/vkActions';
 
+import './main.scss';
+
 @connect(mapStateToProps, mapDispatchToProps)
 export class Main extends React.PureComponent {
   componentDidMount () {
