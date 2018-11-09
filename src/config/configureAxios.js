@@ -1,0 +1,3 @@
+export function configureAxios (store) {
+
+}
