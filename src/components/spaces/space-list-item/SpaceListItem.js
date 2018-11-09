@@ -16,8 +16,6 @@ type SpaceListItemProps = {
 @withRouter
 export class SpaceListItem extends React.PureComponent<SpaceListItemProps> {
   render () {
-
-    console.log(this.props);
     return (
       <Div>
         <Link to={ `/${this.props.location.pathname.split('/')[1]}/space-details?id=${ this.props.space.id }` }>Space list item</Link>

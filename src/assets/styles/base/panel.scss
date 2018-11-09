@@ -7,3 +7,9 @@
     height: 100%;
   }
 }
+
+.l-panel--no-tabbar {
+  .Panel__in {
+    padding-bottom: 0;
+  }
+}
