@@ -1,0 +1,28 @@
+.time-range {
+  display: flex;
+
+  &__input {
+    background-color: transparent !important;
+    padding-top: 0!important;
+    width: 114px;
+    position: relative;
+
+    &:last-child {
+      padding-left: 8px;
+
+      &:before {
+        content: "—";
+        position: absolute;
+        right: 100%;
+        top: calc(50% - 1px);
+        padding-left: 10px !important;
+        line-height: 1px;
+        color: #C4C4C4;
+      }
+    }
+
+    input {
+      color: #9A9EA2;
+    }
+  }
+}
