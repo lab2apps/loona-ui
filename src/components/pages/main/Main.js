@@ -11,6 +11,8 @@ import { getUserInfo } from '../../../store/actions/vkActions';
 import { Dashboard } from '../dashboard/Dashboard';
 
 import './main.scss';
+import { EditSpace } from '../edit-space/EditSpace';
+import { EditRoom } from '../edit-room/EditRoom';
 
 @withRouter
 @connect(mapStateToProps, mapDispatchToProps)
@@ -40,6 +42,14 @@ export class Main extends React.PureComponent {
             className='l-main'>
         <Panel id='/'>
           <Dashboard/>
+        </Panel>
+
+        <Panel id='/edit-space'>
+          <EditSpace/>
+        </Panel>
+
+        <Panel id='/edit-room'>
+          <EditRoom/>
         </Panel>
       </View>
     );
