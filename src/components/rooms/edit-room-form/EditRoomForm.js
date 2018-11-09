@@ -9,7 +9,11 @@ import {
   Checkbox,
   Button,
   Link,
+  Div,
+  File,
 } from '@vkontakte/vkui/';
+
+import Icon24Camera from '@vkontakte/icons/dist/24/camera';
 
 type EditRoomFormProps = {
   roomId: number,
@@ -24,28 +28,56 @@ export class EditRoomForm extends React.PureComponent<EditRoomFormProps> {
   render () {
     return (
       <FormLayout>
-        <Input type="email" top="E-mail" />
-        <FormLayoutGroup top="Пароль" bottom="Пароль может содержать только латинские буквы и цифры.">
-          <Input type="password"  placeholder="Введите пароль" />
-          <Input type="password" placeholder="Повторите пароль" />
-        </FormLayoutGroup>
-        <Input top="Имя" />
-        <Input top="Фамилия" />
-        <Select top="Пол" placeholder="Выберите пол">
-          <option value="m">Мужской</option>
-          <option value="f">Женский</option>
+
+        <Input type="text"
+               top="Название площадки"
+               placeholder="Введите название площадки"/>
+
+        <Select top="Тип площадки" placeholder="Выберите тип площадки">
+          <option value="a">А</option>
+          <option value="b">Б</option>
         </Select>
-        <div top="Тип документа">
-          <Radio name="type">Паспорт</Radio>
-          <Radio name="type">Загран</Radio>
-        </div>
-        <Textarea top="О себе" />
-        <FormLayoutGroup>
-          <Checkbox>Согласен со всем <Link>этим</Link></Checkbox>
-          <div>
-            <Button type="cell">Зарегистрироваться</Button>
-          </div>
+
+        <File top="Добавить фото" before={<Icon24Camera/>} size="l">
+          Открыть галерею
+        </File>
+
+        <Textarea top="Описание площадки"/>
+
+        <Input type="text"
+               top="Адрес площадки"
+               placeholder="Введите адрес площадки"/>
+
+        <Input type="text"
+               top="Телефон для связи"
+               placeholder="Введите телефон"/>
+
+        <FormLayoutGroup top="Дни работы площадки">
+          <Checkbox>Понедельник</Checkbox>
+          <Checkbox>Вторник</Checkbox>
+          <Checkbox>Среда</Checkbox>
+          <Checkbox>Четверг</Checkbox>
+          <Checkbox>Пятница</Checkbox>
+          <Checkbox>Суббота</Checkbox>
+          <Checkbox>Воскресенье</Checkbox>
         </FormLayoutGroup>
+
+        <FormLayoutGroup
+          top="Дни работы площадки"
+          className="l-time-range">
+          <Input className='l-time-range__input' type="time" defaultValue="09:00"/>
+          <Input className='l-time-range__input' type="time" defaultValue="20:00"/>
+        </FormLayoutGroup>
+
+        <Div className='l-text-gray'>
+          После подтверждения создания площадки, она будет отправлена на модерацию, но вы можете добавлять в ней комнаты
+          и пространства
+        </Div>
+
+        <Checkbox>Согласен со всем <Link>этим</Link></Checkbox>
+
+        <Button size="xl" level="primary">Создать площадку</Button>
+
       </FormLayout>
     );
   }
