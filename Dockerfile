@@ -1,7 +1,7 @@
 # build environment
 FROM node:alpine as builder
 WORKDIR /usr/src/app
-COPY package.json package-lock.json ./
+COPY package.json yarn.lock ./
 ENV NODE_ENV development
 RUN npm install
 COPY . ./
