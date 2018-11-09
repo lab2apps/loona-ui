@@ -33,7 +33,7 @@ export class Main extends React.PureComponent {
   }
 
   render () {
-    console.log(this.props.location.pathname);
+    console.warn('pathname',this.props.location.pathname);
 
     return (
       <View id='main'

@@ -15,7 +15,7 @@ export class SpacesList extends React.PureComponent<SpacesListProps> {
   render () {
     return (
       this.items.map((item,i)=>{
-        return <SpaceListItem/>;
+        return <SpaceListItem key={i}/>;
       })
     );
   }
