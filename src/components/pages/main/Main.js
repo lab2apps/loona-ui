@@ -89,6 +89,10 @@ export class Main extends React.PureComponent {
           <Panel id='/my/room-details'>
             <Room/>
           </Panel>
+
+          <Panel id='/my/edit-room'>
+            <EditRoom/>
+          </Panel>
         </View>
       </Epic>
     );
