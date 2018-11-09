@@ -14,7 +14,7 @@ export class App extends Component {
     return (
       <div>
         {/* DEBUG ROUTER */}
-        <div><Link to="/edit-room">Main</Link></div>
+        <div><Link to="/">Main</Link></div>
         <div><Link to="/edit-room">EditRoomForm</Link></div>
         <div><Link to="/edit-space">EditSpaceForm</Link></div>
 
