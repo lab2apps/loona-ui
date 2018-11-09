@@ -10,7 +10,11 @@ import {
   Textarea,
 } from '@vkontakte/vkui';
 
-export class EditSpaceForm extends React.PureComponent {
+type EditSpaceFormProps = {
+  spaceId: number,
+}
+
+export class EditSpaceForm extends React.PureComponent<EditSpaceFormProps> {
   render () {
     return (
       <FormLayout>
