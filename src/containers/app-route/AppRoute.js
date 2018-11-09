@@ -13,7 +13,7 @@ type SplashScreenRouteProps = {
 };
 
 @withRouter
-class SplashScreenRoute extends React.PureComponent<SplashScreenRouteProps> {
+class SplashScreenRoute extends React.Component<SplashScreenRouteProps> {
   state = {
     delay: false,
   };
@@ -40,15 +40,18 @@ class SplashScreenRoute extends React.PureComponent<SplashScreenRouteProps> {
       return <Redirect to={ '/onboarding' }/>;
     }
 
-    return <Component { ...props }/>;
+    return <Component { ...props } location={ this.props.location.pathname }/>;
   }
 }
 
-export const AppRoute = connect(mapStateToProps)(({ component: Component, settings, user, ...restProps }) => {
+export const AppRoute = Route;
+
+export const ERoute = connect(mapStateToProps)(({ component: Component, settings, user, ...restProps }) => {
   return (<Route { ...restProps }
                  render={ (props) => {
                    return <SplashScreenRoute userId={ user.id }
                                              props={ props }
+                                             location={ props.location }
                                              showOnBoarding={ settings.showOnBoarding }
                                              component={ Component }/>;
                  } }/>);

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { View, Panel } from '@vkontakte/vkui';
-import { withRouter } from 'react-router-dom';
+import { View, Panel, Epic, Tabbar, TabbarItem } from '@vkontakte/vkui';
+import { Link, withRouter } from 'react-router-dom';
 
 import { Dashboard } from '../dashboard/Dashboard';
 import { EditSpace } from '../edit-space/EditSpace';
@@ -23,8 +23,6 @@ export class Main extends React.PureComponent {
       activePanel: props.history.location.pathname,
     };
 
-    console.log(props.history.location.pathname);
-
     if (newState.activePanel !== state.activePanel) {
       return newState;
     }
@@ -32,17 +30,64 @@ export class Main extends React.PureComponent {
     return null;
   }
 
+  goToPanel = (panel) => {
+    return () => {
+      this.props.history.push(panel);
+    };
+  };
+
   render () {
-    console.warn('pathname',this.props.location.pathname);
+    console.log(this.state.activePanel);
+
+    if (this.state.activePanel === '/' || this.state.activePanel === '/my-spaces' || this.state.activePanel === '/edit-space') {
+      const hasTabbar = this.state.activePanel !== '/edit-space';
+
+      return (
+        <Epic activeStory={ this.state.activePanel === '/edit-space' ? '/' : this.state.activePanel }
+
+              tabbar={ hasTabbar && <Tabbar>
+                <TabbarItem onClick={ this.goToPanel('/') }
+                            selected={ this.state.activePanel === '/' }>
+                  Все Площадки
+                </TabbarItem>
+
+                <TabbarItem onClick={ this.goToPanel('/my-spaces') }
+                            selected={ this.state.activePanel === '/my-spaces' }>
+                  Мои Площадки
+                </TabbarItem>
+              </Tabbar>
+              }>
+
+          <View id='/'
+                activePanel={ this.state.activePanel }>
+            <Panel id='/'>
+              <AllSpaces/>
+              <Link to={'/edit-space'}>go</Link>
+            </Panel>
+
+            <Panel id='/edit-space'>
+              <EditSpace/>
+              <Link to={'/space-details'}>go</Link>
+
+            </Panel>
+          </View>
+
+          <View id='/my-spaces'
+                activePanel={ '/my-spaces' }>
+            <Panel id='/my-spaces'>
+              <MySpaces/>
+              <Link to={'/edit-space'}>go</Link>
+
+            </Panel>
+          </View>
+        </Epic>
+      );
+    }
 
     return (
       <View id='main'
             activePanel={ this.state.activePanel }
             className='l-main'>
-        <Panel id='/'>
-          <Dashboard/>
-        </Panel>
-
         <Panel id='/onboarding'
                className='l-onboarding l-panel l-panel--full-height'>
           <Onboarding/>
@@ -66,7 +111,7 @@ export class Main extends React.PureComponent {
         </Panel>
 
 
-        {/* ROOMS */}
+        { /* ROOMS */ }
         <Panel id='/edit-room'>
           <EditRoom/>
         </Panel>

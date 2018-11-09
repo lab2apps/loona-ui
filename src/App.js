@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -11,6 +11,7 @@ import { AppRoute } from './containers/app-route/AppRoute';
 
 import 'styles/app.scss';
 
+@withRouter
 @connect(mapStateToProps, mapDispatchToProps)
 export class App extends Component {
   componentDidMount () {
@@ -20,7 +21,7 @@ export class App extends Component {
   render () {
     return (
       <Switch>
-        <AppRoute path='/' component={ Main }/>
+        <AppRoute path='/' exact={false} component={ Main }/>
       </Switch>
     );
   }
