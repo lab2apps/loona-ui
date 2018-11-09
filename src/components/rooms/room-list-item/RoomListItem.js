@@ -10,14 +10,14 @@ type RoomData = {
 }
 
 type RoomListItemProps = {
-  room: number
+  room: RoomData
 }
 
 export class RoomListItem extends React.PureComponent<RoomListItemProps> {
   render () {
     return (
       <Div>
-        <Link to={ `/room-details?id=${ this.props.roomId }` }>Room list item</Link>
+        <Link to={ `/room-details?id=${ this.props.room.id }` }>Room list item</Link>
       </Div>
     );
   }

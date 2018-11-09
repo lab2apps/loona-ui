@@ -7,12 +7,12 @@ import { Dashboard } from '../dashboard/Dashboard';
 import { EditSpace } from '../edit-space/EditSpace';
 import { EditRoom } from '../edit-room/EditRoom';
 import { Onboarding } from '../onboarding/Onboarding';
-import { RoomDetails } from '../../rooms/room-details/RoomDetails';
+import { Room } from '../room/Room';
 import { AllSpaces } from '../all-spaces/AllSpaces';
 import { MySpaces } from '../my-spaces/MySpaces';
-import { SpaceDetails } from '../../spaces/space-details/SpaceDetails';
 
 import './main.scss';
+import { Space } from '../space/SpaceDetails';
 
 @withRouter
 export class Main extends React.PureComponent {
@@ -62,7 +62,7 @@ export class Main extends React.PureComponent {
         </Panel>
 
         <Panel id='/space-details'> {/* ?id=[spaceId] */}
-          <SpaceDetails/>
+          <Space/>
         </Panel>
 
 
@@ -72,7 +72,7 @@ export class Main extends React.PureComponent {
         </Panel>
 
         <Panel id='/room-details'> {/* ?id=[roomId] */}
-          <RoomDetails/>
+          <Room/>
         </Panel>
 
       </View>
