@@ -55,7 +55,6 @@ export class EditSpaceForm extends React.PureComponent<EditSpaceFormProps> {
           <Checkbox>Воскресенье</Checkbox>
         </FormLayoutGroup>
 
-        {/* Время работы площадки */}
         <FormLayoutGroup top="Дни работы площадки" className="time-range">
           <Input className='time-range__input' type="time" defaultValue="09:00" />
           <Input className='time-range__input' type="time" defaultValue="20:00" />
