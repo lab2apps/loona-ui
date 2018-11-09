@@ -1,14 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+
 import { View, Panel } from '@vkontakte/vkui';
 import { withRouter } from 'react-router-dom';
 
 import { Dashboard } from '../dashboard/Dashboard';
-
-import './main.scss';
 import { EditSpace } from '../edit-space/EditSpace';
 import { EditRoom } from '../edit-room/EditRoom';
+import { Onboarding } from '../onboarding/Onboarding';
+
+import './main.scss';
 
 @withRouter
 export class Main extends React.PureComponent {
@@ -16,8 +16,10 @@ export class Main extends React.PureComponent {
 
   static getDerivedStateFromProps (props, state) {
     const newState = {
-      activePanel: props.location.pathname,
+      activePanel: props.history.location.pathname,
     };
+
+    console.log(props.history.location.pathname);
 
     if (newState.activePanel !== state.activePanel) {
       return newState;
@@ -27,12 +29,19 @@ export class Main extends React.PureComponent {
   }
 
   render () {
+    console.log(this.props.location.pathname);
+
     return (
       <View id='main'
             activePanel={ this.state.activePanel }
             className='l-main'>
         <Panel id='/'>
           <Dashboard/>
+        </Panel>
+
+        <Panel id='/onboarding'
+               className='l-onboarding l-panel l-panel--full-height'>
+          <Onboarding/>
         </Panel>
 
         <Panel id='/edit-space'>

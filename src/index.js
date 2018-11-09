@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import connect from '@vkontakte/vkui-connect';
 import { Provider } from 'react-redux';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import { App } from './App';
 
@@ -17,9 +17,9 @@ const AppStore = configureStore();
 const render = (Component) => {
   ReactDOM.render(
     <Provider store={ AppStore }>
-        <HashRouter>
+        <BrowserRouter>
           <Component/>
-        </HashRouter>
+        </BrowserRouter>
     </Provider>,
     rootElement,
   );

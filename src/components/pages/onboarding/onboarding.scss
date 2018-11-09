@@ -1,0 +1,52 @@
+
+
+// #MAIN
+//------------------------------------
+
+.l-onboarding {
+
+  &__gallery {
+    .Gallery__bullets--dark {
+      bottom: 36px;
+
+      .Gallery__bullet {
+        width: 10px;
+        height: 10px;
+        background-color: var(--steel_gray_200);
+
+        &--active {
+          background-color: var(--blue_400);
+        }
+      }
+    }
+  }
+
+  &__item {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  &__title {
+    font-size: 20px;
+    padding: 12px 0;
+  }
+
+  &__image {
+    max-width: 60vw;
+    margin-bottom: 30px;
+  }
+
+  &__description {
+    max-width: 80vw;
+    text-align: center;
+    color: var(--steel_gray_500);
+    margin-bottom: 36px;
+  }
+
+  &__btn {
+    max-width: 80vw;
+  }
+}

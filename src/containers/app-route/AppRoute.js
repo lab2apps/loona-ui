@@ -1,11 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { Redirect, Route, withRouter } from 'react-router-dom';
 
 import { SplashScreen } from '../../components/splash-screen/SplashScreen';
 import type { RootState } from '../../store/reducers/rootReducer';
 
-class SplashScreenRoute extends React.PureComponent {
+type SplashScreenRouteProps = {
+  userId: string;
+  component: any;
+  props: any;
+  showOnBoarding: boolean;
+};
+
+@withRouter
+class SplashScreenRoute extends React.PureComponent<SplashScreenRouteProps> {
   state = {
     delay: false,
   };
@@ -28,14 +36,21 @@ class SplashScreenRoute extends React.PureComponent {
       return <SplashScreen/>;
     }
 
+    if (this.props.showOnBoarding && this.props.location.pathname !== '/onboarding') {
+      return <Redirect to={ '/onboarding' }/>;
+    }
+
     return <Component { ...props }/>;
   }
 }
 
-export const AppRoute = connect(mapStateToProps)(({ component: Component, user, ...restProps }) => {
+export const AppRoute = connect(mapStateToProps)(({ component: Component, settings, user, ...restProps }) => {
   return (<Route { ...restProps }
                  render={ (props) => {
-                   return <SplashScreenRoute userId={ user.id } props={ props } component={ Component }/>;
+                   return <SplashScreenRoute userId={ user.id }
+                                             props={ props }
+                                             showOnBoarding={ settings.showOnBoarding }
+                                             component={ Component }/>;
                  } }/>);
 });
 
@@ -44,5 +59,6 @@ AppRoute.propTypes = Route.propTypes;
 function mapStateToProps (state: RootState) {
   return {
     user: state.user,
+    settings: state.settings,
   };
 }
