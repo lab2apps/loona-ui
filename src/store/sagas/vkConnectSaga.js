@@ -21,6 +21,7 @@ function subscribeToVkEvents () {
         }
 
         default: {
+          console.warn('Unknown VK EVENT');
           console.log(detail);
         }
       }
