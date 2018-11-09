@@ -1,5 +1,5 @@
 import React from 'react';
-import { PanelHeader, Gallery, Button } from '@vkontakte/vkui';
+import { PanelHeader, Gallery, Button, View, Panel } from '@vkontakte/vkui';
 import { Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -28,8 +28,6 @@ const onBoardingItems = [
 export class Onboarding extends React.PureComponent {
   ref = React.createRef();
 
-  state = {};
-
   showNextSlide = (index) => {
     return () => {
       this.ref.current.go(index + 1);
@@ -38,61 +36,56 @@ export class Onboarding extends React.PureComponent {
 
   goToMainPage = () => {
     this.props.hideOnBoarding();
-    this.props.history.push('/');
-    // this.setState({
-    //   redirect: true,
-    // });
+    this.props.history.replace('/');
   };
 
   render () {
-    if (this.state.redirect) {
-      return <Redirect to={ '/' }/>;
-    }
-
-
     return (
-      <React.Fragment>
-        <PanelHeader>
-          Loona
-        </PanelHeader>
+      <View id={ '/onboarding' } activePanel='/onboarding'>
+        <Panel id='/onboarding'
+               className='l-onboarding l-panel l-panel--full-height'>
+          <PanelHeader>
+            Loona
+          </PanelHeader>
 
-        <Gallery bullets={ 'dark' }
-                 ref={ this.ref }
-                 className='l-onboarding__gallery'
-                 style={ { height: '100%' } }>
+          <Gallery bullets={ 'dark' }
+                   ref={ this.ref }
+                   className='l-onboarding__gallery'
+                   style={ { height: '100%' } }>
 
-          { onBoardingItems.map((item, index) => {
-            return (
-              <div className='l-onboarding__item'
-                   key={ index }>
-                <img src={ item.image } className='l-onboarding__image'/>
+            { onBoardingItems.map((item, index) => {
+              return (
+                <div className='l-onboarding__item'
+                     key={ index }>
+                  <img src={ item.image } className='l-onboarding__image'/>
 
-                <div className='l-onboarding__title'>
-                  { item.title }
+                  <div className='l-onboarding__title'>
+                    { item.title }
+                  </div>
+
+                  <div className='l-onboarding__description'>
+                    { item.description }
+                  </div>
+
+                  { index === (onBoardingItems.length - 1) ? (
+                    <Button className='l-onboarding__btn'
+                            onClick={ this.goToMainPage }
+                            size='l'>
+                      Начать
+                    </Button>
+                  ) : (
+                    <Button className='l-onboarding__btn'
+                            onClick={ this.showNextSlide(index) }
+                            size='l'>
+                      Дальше
+                    </Button>
+                  ) }
                 </div>
-
-                <div className='l-onboarding__description'>
-                  { item.description }
-                </div>
-
-                { index === (onBoardingItems.length - 1) ? (
-                  <Button className='l-onboarding__btn'
-                          onClick={ this.goToMainPage }
-                          size='l'>
-                    Начать
-                  </Button>
-                ) : (
-                  <Button className='l-onboarding__btn'
-                          onClick={ this.showNextSlide(index) }
-                          size='l'>
-                    Дальше
-                  </Button>
-                ) }
-              </div>
-            );
-          }) }
-        </Gallery>
-      </React.Fragment>
+              );
+            }) }
+          </Gallery>
+        </Panel>
+      </View>
     );
   }
 }

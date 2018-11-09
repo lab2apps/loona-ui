@@ -44,9 +44,7 @@ class SplashScreenRoute extends React.Component<SplashScreenRouteProps> {
   }
 }
 
-export const AppRoute = Route;
-
-export const ERoute = connect(mapStateToProps)(({ component: Component, settings, user, ...restProps }) => {
+export const AppRoute = connect(mapStateToProps)(({ component: Component, settings, user, ...restProps }) => {
   return (<Route { ...restProps }
                  render={ (props) => {
                    return <SplashScreenRoute userId={ user.id }

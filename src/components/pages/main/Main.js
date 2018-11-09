@@ -1,9 +1,8 @@
 import React from 'react';
 
 import { View, Panel, Epic, Tabbar, TabbarItem } from '@vkontakte/vkui';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
-import { Dashboard } from '../dashboard/Dashboard';
 import { EditSpace } from '../edit-space/EditSpace';
 import { EditRoom } from '../edit-room/EditRoom';
 import { Onboarding } from '../onboarding/Onboarding';
@@ -19,8 +18,18 @@ export class Main extends React.PureComponent {
   state = {};
 
   static getDerivedStateFromProps (props, state) {
+    let newActiveStory    = props.history.location.pathname.split('/')[1];
+    let changeActiveStory = false;
+
+    if (['all', 'my'].includes(newActiveStory)) {
+      if (newActiveStory !== state.activeStory) {
+        changeActiveStory = true;
+      }
+    }
+
     const newState = {
       activePanel: props.history.location.pathname,
+      activeStory: changeActiveStory ? '/' + newActiveStory : state.activeStory,
     };
 
     if (newState.activePanel !== state.activePanel) {
@@ -37,90 +46,51 @@ export class Main extends React.PureComponent {
   };
 
   render () {
-    console.log(this.state.activePanel);
-
-    if (this.state.activePanel === '/' || this.state.activePanel === '/my-spaces' || this.state.activePanel === '/edit-space') {
-      const hasTabbar = this.state.activePanel !== '/edit-space';
-
-      return (
-        <Epic activeStory={ this.state.activePanel === '/edit-space' ? '/' : this.state.activePanel }
-
-              tabbar={ hasTabbar && <Tabbar>
-                <TabbarItem onClick={ this.goToPanel('/') }
-                            selected={ this.state.activePanel === '/' }>
-                  Все Площадки
-                </TabbarItem>
-
-                <TabbarItem onClick={ this.goToPanel('/my-spaces') }
-                            selected={ this.state.activePanel === '/my-spaces' }>
-                  Мои Площадки
-                </TabbarItem>
-              </Tabbar>
-              }>
-
-          <View id='/'
-                activePanel={ this.state.activePanel }>
-            <Panel id='/'>
-              <AllSpaces/>
-              <Link to={'/edit-space'}>go</Link>
-            </Panel>
-
-            <Panel id='/edit-space'>
-              <EditSpace/>
-              <Link to={'/space-details'}>go</Link>
-
-            </Panel>
-          </View>
-
-          <View id='/my-spaces'
-                activePanel={ '/my-spaces' }>
-            <Panel id='/my-spaces'>
-              <MySpaces/>
-              <Link to={'/edit-space'}>go</Link>
-
-            </Panel>
-          </View>
-        </Epic>
-      );
-    }
-
     return (
-      <View id='main'
-            activePanel={ this.state.activePanel }
-            className='l-main'>
-        <Panel id='/onboarding'
-               className='l-onboarding l-panel l-panel--full-height'>
-          <Onboarding/>
-        </Panel>
+      <Epic activeStory={ this.state.activeStory }
+            tabbar={ <Tabbar>
+              <TabbarItem onClick={ this.goToPanel('/all') }
+                          selected={ this.state.activeStory === '/all' }>
+                Все Площадки
+              </TabbarItem>
 
-        {/* SPACES */}
-        <Panel id='/all-spaces'>
-          <AllSpaces/>
-        </Panel>
+              <TabbarItem onClick={ this.goToPanel('/my') }
+                          selected={ this.state.activeStory === '/my' }>
+                Мои Площадки
+              </TabbarItem>
+            </Tabbar>
+            }>
 
-        <Panel id='/my-spaces'>
-          <MySpaces/>
-        </Panel>
+        <View id='/all'
+              activePanel={ this.state.activePanel }>
+          <Panel id='/all'>
+            <AllSpaces/>
+          </Panel>
 
-        <Panel id='/edit-space'>
-          <EditSpace/>
-        </Panel>
+          <Panel id='/all/space-details'>
+            <Space/>
+          </Panel>
 
-        <Panel id='/space-details'> {/* ?id=[spaceId] */}
-          <Space/>
-        </Panel>
+          <Panel id='/all/room-details'>
+            <Room/>
+          </Panel>
+        </View>
 
+        <View id='/my'
+              activePanel={ this.state.activePanel }>
+          <Panel id='/my'>
+            <MySpaces/>
+          </Panel>
 
-        { /* ROOMS */ }
-        <Panel id='/edit-room'>
-          <EditRoom/>
-        </Panel>
+          <Panel id='/my/space-details'>
+            <Space/>
+          </Panel>
 
-        <Panel id='/room-details'> {/* ?id=[roomId] */}
-          <Room/>
-        </Panel>
-
-      </View>
+          <Panel id='/my/room-details'>
+            <Room/>
+          </Panel>
+        </View>
+      </Epic>
     );
   }
 }

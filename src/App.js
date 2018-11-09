@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, withRouter } from 'react-router-dom';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -8,6 +8,7 @@ import { getUserInfo } from './store/actions/vkActions';
 
 import { Main } from './components/pages/main/Main';
 import { AppRoute } from './containers/app-route/AppRoute';
+import { Onboarding } from './components/pages/onboarding/Onboarding';
 
 import 'styles/app.scss';
 
@@ -21,7 +22,9 @@ export class App extends Component {
   render () {
     return (
       <Switch>
-        <AppRoute path='/' exact={false} component={ Main }/>
+        <Route path='/onboarding' exact={ true } component={ Onboarding }/>
+        <Redirect from={ '/' } to={ '/all' } exact={ true }/>
+        <AppRoute path='/' exact={ false } component={ Main }/>
       </Switch>
     );
   }
