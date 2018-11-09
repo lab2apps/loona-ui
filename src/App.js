@@ -5,6 +5,8 @@ import { Main } from './components/pages/main/Main';
 
 import 'styles/app.scss';
 
+
+
 export class App extends Component {
   render () {
     return (
