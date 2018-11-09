@@ -31,11 +31,11 @@ export class EditSpaceForm extends React.PureComponent<EditSpaceFormProps> {
           <option value="b">Б</option>
         </Select>
 
-        <File top="Добавить фото" before={<Icon24Camera />} size="l">
+        <File top="Добавить фото" before={<Icon24Camera/>} size="l">
           Открыть галерею
         </File>
 
-        <Textarea top="Описание площадки" />
+        <Textarea top="Описание площадки"/>
 
         <Input type="text"
                top="Адрес площадки"
@@ -55,13 +55,16 @@ export class EditSpaceForm extends React.PureComponent<EditSpaceFormProps> {
           <Checkbox>Воскресенье</Checkbox>
         </FormLayoutGroup>
 
-        <FormLayoutGroup top="Дни работы площадки" className="time-range">
-          <Input className='time-range__input' type="time" defaultValue="09:00" />
-          <Input className='time-range__input' type="time" defaultValue="20:00" />
+        <FormLayoutGroup
+          top="Дни работы площадки"
+          className="l-time-range">
+          <Input className='l-time-range__input' type="time" defaultValue="09:00"/>
+          <Input className='l-time-range__input' type="time" defaultValue="20:00"/>
         </FormLayoutGroup>
 
-        <Div style={ {color: '#828282'} }>
-          После подтверждения создания площадки, она будет отправлена на модерацию, но вы можете добавлять в ней комнаты и пространства
+        <Div className='l-text-gray'>
+          После подтверждения создания площадки, она будет отправлена на модерацию, но вы можете добавлять в ней комнаты
+          и пространства
         </Div>
 
         <Checkbox>Согласен со всем <Link>этим</Link></Checkbox>
