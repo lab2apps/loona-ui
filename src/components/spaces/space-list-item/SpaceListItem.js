@@ -11,7 +11,7 @@ export class SpaceListItem extends React.PureComponent<SpaceListItemProps> {
   render () {
     return (
       <Div>
-        Space details
+        Space list item
       </Div>
     );
   }

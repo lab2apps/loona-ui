@@ -7,6 +7,10 @@ import { Dashboard } from '../dashboard/Dashboard';
 import { EditSpace } from '../edit-space/EditSpace';
 import { EditRoom } from '../edit-room/EditRoom';
 import { Onboarding } from '../onboarding/Onboarding';
+import { RoomDetails } from '../../rooms/room-details/RoomDetails';
+import { AllSpaces } from '../all-spaces/AllSpaces';
+import { MySpaces } from '../my-spaces/MySpaces';
+import { SpaceDetails } from '../../spaces/space-details/SpaceDetails';
 
 import './main.scss';
 
@@ -44,13 +48,33 @@ export class Main extends React.PureComponent {
           <Onboarding/>
         </Panel>
 
+        {/* SPACES */}
+        <Panel id='/all-spaces'>
+          <AllSpaces/>
+        </Panel>
+
+        <Panel id='/my-spaces'>
+          <MySpaces/>
+        </Panel>
+
         <Panel id='/edit-space'>
           <EditSpace/>
         </Panel>
 
+        <Panel id='/space-details'> {/* ?id=[spaceId] */}
+          <SpaceDetails/>
+        </Panel>
+
+
+        {/* ROOMS */}
         <Panel id='/edit-room'>
           <EditRoom/>
         </Panel>
+
+        <Panel id='/room-details'> {/* ?id=[roomId] */}
+          <RoomDetails/>
+        </Panel>
+
       </View>
     );
   }
