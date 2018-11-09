@@ -1,0 +1,14 @@
+// #SPLASH SCREEN
+//------------------------------------
+
+.l-splash-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  &__icon {
+    width: 247px;
+    height: 49px;
+  }
+}
