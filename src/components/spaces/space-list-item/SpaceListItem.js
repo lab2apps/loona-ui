@@ -25,3 +25,4 @@ export class SpaceListItem extends React.PureComponent<SpaceListItemProps> {
     );
   }
 }
+
