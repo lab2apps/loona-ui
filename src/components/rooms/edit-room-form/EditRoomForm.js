@@ -11,7 +11,16 @@ import {
   Link,
 } from '@vkontakte/vkui/';
 
-export class EditRoomForm extends React.PureComponent {
+type EditRoomFormProps = {
+  roomId: number,
+}
+
+export class EditRoomForm extends React.PureComponent<EditRoomFormProps> {
+
+  componentDidMount () {
+    console.warn('hala', this.props)
+  }
+
   render () {
     return (
       <FormLayout>
