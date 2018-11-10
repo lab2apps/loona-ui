@@ -42,11 +42,18 @@ export class SpaceApiService {
       });
   }
 
-
   static remove (id) {
     return axios.delete(`${environment.apiUrl}/api/space/${id}`)
       .then(response => {
         return response.data;
       });
   }
+
+  static query (queryString) {
+    return axios.get(`${environment.apiUrl}/api/space/search?spaceName=${queryString}`)
+      .then(response => {
+        return response.data;
+      });
+  }
+
 }

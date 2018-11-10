@@ -159,3 +159,28 @@ export const removeSpace = (id) => {
   };
 };
 
+export const querySpaces = ({queryString}) => {
+  return (dispatch) => {
+    dispatch({
+      type: SpaceActionType.FETCHING,
+    });
+
+    return SpaceApiService.query(queryString)
+      .then(data => {
+        dispatch({
+          type: SpaceActionType.SUCCESS,
+          payload: {
+            data,
+          }
+        });
+      })
+      .catch((e) => {
+        dispatch({
+          type: SpaceActionType.FAILURE,
+        });
+
+        throw e;
+      });
+  };
+};
+

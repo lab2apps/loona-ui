@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { FixedLayout, PanelHeader, Search, Tabs, TabsItem } from '@vkontakte/vkui';
 import { SpacesList } from '../../spaces/spaces-list/SpacesList';
-import { getSpaces } from '../../../store/actions/spaceActions';
+import { getSpaces, querySpaces } from '../../../store/actions/spaceActions';
 import { MapView } from '../../common/MapView';
 
 const SPACES_VIEW_TYPES = {
@@ -24,6 +24,12 @@ export class AllSpaces extends React.PureComponent {
     this.props.getSpaces();
   }
 
+  onQueryChange = (queryString) => {
+    this.props.querySpaces({
+      queryString
+    });
+  };
+
   render () {
     return (
       <React.Fragment>
@@ -32,16 +38,18 @@ export class AllSpaces extends React.PureComponent {
         </PanelHeader>
 
         <FixedLayout vertical="top">
-          <Search className={
-            (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW) ? 'l-search--bg-transparent' : ''
-          }/>
+          <Search
+            onChange={this.onQueryChange}
+            className={
+              (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW) ? 'l-search--bg-transparent' : ''
+            }/>
         </FixedLayout>
 
 
         {
           (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.LIST_VIEW) &&
-          <div style={ { padding: '60px 0 96px'} }>
-            <SpacesList spaces={ this.props.spaces }>
+          <div style={{ padding: '60px 0 96px' }}>
+            <SpacesList spaces={this.props.spaces}>
             </SpacesList>
           </div>
         }
@@ -49,7 +57,7 @@ export class AllSpaces extends React.PureComponent {
         {
           (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW) &&
           <React.Fragment>
-            <div style={ { height: '100%', padding: '0 0 96px'} }>
+            <div style={{ height: '100%', padding: '0 0 96px' }}>
               <MapView>
               </MapView>
             </div>
@@ -59,17 +67,17 @@ export class AllSpaces extends React.PureComponent {
         <FixedLayout vertical="bottom">
           <Tabs>
             <TabsItem
-              onClick={ () => {
+              onClick={() => {
                 this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.LIST_VIEW });
-              } }
-              selected={ this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.LIST_VIEW }>
+              }}
+              selected={this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.LIST_VIEW}>
               Списком
             </TabsItem>
             <TabsItem
-              onClick={ () => {
+              onClick={() => {
                 this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.MAP_VIEW });
-              } }
-              selected={ this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW }>
+              }}
+              selected={this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW}>
               На карте
             </TabsItem>
           </Tabs>
@@ -84,7 +92,6 @@ function mapStateToProps (state) {
   return state.spaces;
 }
 
-
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators({ getSpaces }, dispatch);
+  return bindActionCreators({ getSpaces, querySpaces }, dispatch);
 }
