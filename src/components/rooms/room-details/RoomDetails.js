@@ -13,6 +13,8 @@ import { ROOM_TYPES } from '../../../contants/ROOM_TYPES';
 import { OPTIONS } from '../../../contants/OPTIONS';
 import { withRouter } from 'react-router-dom';
 import { environment } from '../../../config/environment';
+import { RoomApiService } from '../../../services/RoomApiService';
+import moment from 'moment';
 
 type RoomInfo = {}
 
@@ -25,12 +27,46 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
 
   state = {
     focusedInput: START_DATE,
+    currentMonth: moment(),
     startDate: null,
     endDate: null,
+    orders: [],
+  };
+
+  componentDidMount () {
+    this.updateOrders();
+  }
+
+  onMonthChange = (date) => {
+    this.setState({
+      currentMonth: moment(date),
+    }, () => {
+      this.updateOrders();
+    });
+  };
+
+  updateOrders = () => {
+    const start = this.state.currentMonth.clone().startOf('month');
+    const end   = this.state.currentMonth.clone().endOf('month');
+
+    RoomApiService.getOrders(this.props.room.uuid, start, end).then((data) => {
+      this.setState({
+        orders: data,
+      });
+    });
+  };
+
+  isDateBlocked = (day) => {
+    if (day.isBefore(moment(), 'day')) {
+      return true;
+    }
+
+    return this.state.orders.includes(day.format('YYYY-MM-DD'));
   };
 
   onDatesChange = ({ startDate, endDate }) => {
     console.warn('onDatesChange', { startDate, endDate });
+
     this.setState({ startDate, endDate });
   };
 
@@ -55,6 +91,8 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
 
     const startDateString = startDate ? startDate.format('YYYY-MM-DD') : '';
     const endDateString   = endDate ? endDate.format('YYYY-MM-DD') : '';
+
+    console.log(this.state.orders);
 
     return (
       <React.Fragment>
@@ -160,8 +198,11 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
             <div className="l-centralizer l-border-box">
               <DayPickerRangeController
                 withFullScreenPortal={ true }
+                onPrevMonthClick={ this.onMonthChange }
+                onNextMonthClick={ this.onMonthChange }
                 onDatesChange={ this.onDatesChange }
                 onFocusChange={ this.onFocusChange }
+                isDayBlocked={ (day) => this.isDateBlocked(day) }
                 focusedInput={ focusedInput }
                 startDate={ startDate }
                 endDate={ endDate }
