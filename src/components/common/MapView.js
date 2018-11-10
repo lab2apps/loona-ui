@@ -31,6 +31,10 @@ export class MapView extends React.PureComponent<MavViewProps> {
 
         this.setState({
           currentCoords: [latitude, longitude],
+          mapOptions: {
+            ...this.state.mapOptions,
+            center: [latitude, longitude],
+          }
         });
 
         console.warn(this.state.currentCoords);
@@ -43,7 +47,7 @@ export class MapView extends React.PureComponent<MavViewProps> {
 
   render () {
     return (
-      <React.Fragment>
+      this.state.currentCoords && <React.Fragment>
         <YMapsContainer>
           <YMap defaultState={this.state.mapOptions} instanceRef={this.mapRef} width="100%" height="100%">
             <Placemark geometry={this.state.mapOptions.center}/>
