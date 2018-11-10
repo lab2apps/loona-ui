@@ -1,11 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { PanelHeader, Div, Button, FixedLayout, Search, Tabs, TabsItem } from '@vkontakte/vkui';
+import { PanelHeader, Div, List, FixedLayout, Search, Tabs, TabsItem, CellButton, Cell } from '@vkontakte/vkui';
 
 import { SpacesList } from '../../spaces/spaces-list/SpacesList';
 import { bindActionCreators } from 'redux';
 import { getMySpaces } from '../../../store/actions/spaceActions';
 import connect from 'react-redux/es/connect/connect';
+import Icon24Add from '@vkontakte/icons/dist/24/add';
 
 const SPACES_VIEW_TYPES = {
   SUBSCRIPTIONS: 'LIST',
@@ -43,15 +44,24 @@ export class MySpaces extends React.PureComponent {
           {
             (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MY_SPACES) &&
             <React.Fragment>
+              <List>
+                <Cell>
+                  <CellButton
+                    align="center"
+                    before={ <Icon24Add/> }
+                    onClick={ () => {
+                      this.props.history.push(
+                        '/my/edit-space');
+                    } }
+                  >
+                    Создать площадку
+
+                  </CellButton>
+                </Cell>
+              </List>
+
               <SpacesList spaces={ this.props.spaces.filter(space => space.mySpace) }>
               </SpacesList>
-              <Button size='xl'
-                      onClick={ () => {
-                        this.props.history.push(
-                          '/my/edit-space');
-                      } }>
-                Создать площадку
-              </Button>
             </React.Fragment>
           }
         </div>

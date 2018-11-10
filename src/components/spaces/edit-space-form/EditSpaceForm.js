@@ -37,7 +37,8 @@ export class EditSpaceForm extends React.PureComponent<EditSpaceFormProps> {
                name={ 'name' }
                placeholder="Введите название площадки"/>
 
-        <Select top="Тип площадки" placeholder="Выберите тип площадки"
+        <Select top="Тип площадки"
+                placeholder="Выберите тип площадки"
                 name='type'>
           <option value="0">Пространство</option>
           <option value="1">Коворкинг</option>

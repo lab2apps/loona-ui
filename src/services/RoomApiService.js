@@ -5,7 +5,9 @@ import { environment } from '../config/environment';
 export class RoomApiService {
   static getAll ({ filter  } = {}) {
     return axios.get(`${environment.apiUrl}/api/rooms`, {
-      params: filter,
+      params: {
+        ...filter,
+      },
     })
       .then((response) => {
         return response.data;

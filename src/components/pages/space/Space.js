@@ -27,8 +27,10 @@ export class Space extends React.PureComponent<SpaceDetailsProps> {
           Детали площадки
         </PanelHeader>
 
+        { !this.props.fetching &&
         <SpaceDetails space={ this.props.space }>
         </SpaceDetails>
+        }
 
       </React.Fragment>
     );
