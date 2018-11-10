@@ -20,7 +20,7 @@ type EditSpaceFormProps = {
 export class EditSpaceForm extends React.PureComponent<EditSpaceFormProps> {
   render () {
     return (
-      <FormLayout>
+      <FormLayout className=".l-bg-white">
 
         <Input type="text"
                top="Название площадки"
