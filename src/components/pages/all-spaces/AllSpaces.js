@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { FixedLayout, PanelHeader, Search, Tabs, TabsItem } from '@vkontakte/vkui';
+import debounce from 'lodash/debounce';
 import { SpacesList } from '../../spaces/spaces-list/SpacesList';
 import { getSpaces, querySpaces } from '../../../store/actions/spaceActions';
 import { MapView } from '../../common/MapView';
@@ -24,7 +25,7 @@ export class AllSpaces extends React.PureComponent {
     this.props.getSpaces();
   }
 
-  onQueryChange = (queryString) => {
+  onQueryChange =  (queryString) => {
     this.props.querySpaces({
       queryString
     });
@@ -39,7 +40,7 @@ export class AllSpaces extends React.PureComponent {
 
         <FixedLayout vertical="top">
           <Search
-            onChange={this.onQueryChange}
+            onChange={debounce(this.onQueryChange,300)}
             className={
               (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW) ? 'l-search--bg-transparent' : ''
             }/>
