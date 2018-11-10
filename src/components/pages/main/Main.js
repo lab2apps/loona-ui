@@ -7,7 +7,7 @@ import { EditSpace } from '../edit-space/EditSpace';
 import { Room } from '../room/Room';
 import { AllSpaces } from '../all-spaces/AllSpaces';
 import { MySpaces } from '../my-spaces/MySpaces';
-import { Space } from '../space/SpaceDetails';
+import { Space } from '../space/Space';
 import { EditRoom } from '../edit-room/EditRoom';
 
 import Icon28Newsfeed from '@vkontakte/icons/dist/28/newsfeed';
