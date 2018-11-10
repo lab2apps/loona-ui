@@ -8,14 +8,14 @@ import { Room } from '../room/Room';
 import { AllSpaces } from '../all-spaces/AllSpaces';
 import { MySpaces } from '../my-spaces/MySpaces';
 import { Space } from '../space/SpaceDetails';
-
-import './main.scss';
-
+import { EditRoom } from '../edit-room/EditRoom';
 
 import Icon28Newsfeed from '@vkontakte/icons/dist/28/newsfeed';
 import Icon24FavoriteOutline from '@vkontakte/icons/dist/24/favorite_outline';
 import Icon28Notifications from '@vkontakte/icons/dist/28/notifications';
 import Icon28Menu from '@vkontakte/icons/dist/28/menu';
+
+import './main.scss';
 
 @withRouter
 export class Main extends React.PureComponent {
