@@ -21,7 +21,7 @@ export class AllSpaces extends React.PureComponent {
 
   render () {
     return (
-      <React.Fragment>
+      <div style={{height: '100%'}}>
         <PanelHeader>
           Все площадки
         </PanelHeader>
@@ -30,7 +30,7 @@ export class AllSpaces extends React.PureComponent {
           <Search/>
         </FixedLayout>
 
-        <Div style={ {padding: '60px 0'} }>
+        <Div style={ {padding: '48px 0', height: '100%'} }>
           {
             (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.LIST_VIEW) &&
               <React.Fragment>
@@ -66,7 +66,7 @@ export class AllSpaces extends React.PureComponent {
             </TabsItem>
           </Tabs>
         </FixedLayout>
-      </React.Fragment>
+      </div>
     );
   };
 
