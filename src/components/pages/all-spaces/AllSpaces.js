@@ -27,7 +27,9 @@ export class AllSpaces extends React.PureComponent {
         </PanelHeader>
 
         <FixedLayout vertical="top">
-          <Search/>
+          <Search className={
+            (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW) ? 'l-search--bg-transparent' : ''
+          }/>
         </FixedLayout>
 
 
@@ -42,7 +44,7 @@ export class AllSpaces extends React.PureComponent {
         {
           (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW) &&
           <React.Fragment>
-            <div style={ { height: '100%', padding: '48px 0 96px'} }>
+            <div style={ { height: '100%', padding: '0 0 96px'} }>
               <MapView>
               </MapView>
             </div>
