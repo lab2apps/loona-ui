@@ -96,23 +96,27 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
         <Group>
           <List>
             <Cell>
-              <InfoRow title="Доступность"></InfoRow>
+              <InfoRow title="Доступность">
+              </InfoRow>
             </Cell>
           </List>
 
           <Div>
+            <div hidden>
+              <input type="text" name="start date" value={startDateString} readOnly />
+              <input type="text" name="end date" value={endDateString} readOnly />
+            </div>
 
-            <input type="text" name="start date" value={startDateString} readOnly />
-            <input type="text" name="end date" value={endDateString} readOnly />
-
-            <DayPickerRangeController
-              onDatesChange={this.onDatesChange}
-              onFocusChange={this.onFocusChange}
-              focusedInput={focusedInput}
-              startDate={startDate}
-              endDate={endDate}
-            />
-
+            <div class="l-centralizer">
+              <DayPickerRangeController
+                withFullScreenPortal={true}
+                onDatesChange={this.onDatesChange}
+                onFocusChange={this.onFocusChange}
+                focusedInput={focusedInput}
+                startDate={startDate}
+                endDate={endDate}
+              />
+            </div>
           </Div>
 
           <Div>
