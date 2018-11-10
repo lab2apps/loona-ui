@@ -3,3 +3,9 @@
     margin: 0 auto;
   }
 }
+
+.l-border-box {
+  *, *:before, *:after {
+    box-sizing: border-box
+  }
+}

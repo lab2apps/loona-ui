@@ -107,7 +107,7 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
               <input type="text" name="end date" value={endDateString} readOnly />
             </div>
 
-            <div class="l-centralizer">
+            <div class="l-centralizer l-border-box">
               <DayPickerRangeController
                 withFullScreenPortal={true}
                 onDatesChange={this.onDatesChange}
