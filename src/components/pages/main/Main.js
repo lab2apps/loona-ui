@@ -4,14 +4,18 @@ import { View, Panel, Epic, Tabbar, TabbarItem } from '@vkontakte/vkui';
 import { withRouter } from 'react-router-dom';
 
 import { EditSpace } from '../edit-space/EditSpace';
-import { EditRoom } from '../edit-room/EditRoom';
-import { Onboarding } from '../onboarding/Onboarding';
 import { Room } from '../room/Room';
 import { AllSpaces } from '../all-spaces/AllSpaces';
 import { MySpaces } from '../my-spaces/MySpaces';
+import { Space } from '../space/SpaceDetails';
 
 import './main.scss';
-import { Space } from '../space/SpaceDetails';
+
+
+import Icon24Home from '@vkontakte/icons/dist/24/home';
+import Icon24FavoriteOutline from '@vkontakte/icons/dist/24/favorite_outline';
+import Icon28Notifications from '@vkontakte/icons/dist/28/notifications';
+import Icon28Menu from '@vkontakte/icons/dist/28/menu';
 
 @withRouter
 export class Main extends React.PureComponent {
@@ -21,7 +25,7 @@ export class Main extends React.PureComponent {
     let newActiveStory    = props.history.location.pathname.split('/')[1];
     let changeActiveStory = false;
 
-    if (['all', 'my'].includes(newActiveStory)) {
+    if (['all', 'my', 'notifications', 'additional'].includes(newActiveStory)) {
       if (newActiveStory !== state.activeStory) {
         changeActiveStory = true;
       }
@@ -51,17 +55,27 @@ export class Main extends React.PureComponent {
     return (
       <Epic activeStory={ this.state.activeStory }
             tabbar={ hasTabbar ? <Tabbar>
-              <TabbarItem onClick={ this.goToPanel('/all') }
-                          selected={ this.state.activeStory === '/all' }>
-                Все Площадки
-              </TabbarItem>
+                <TabbarItem onClick={ this.goToPanel('/all') }
+                            selected={ this.state.activeStory === '/all' }>
+                  <Icon24Home/>
+                </TabbarItem>
 
-              <TabbarItem onClick={ this.goToPanel('/my') }
-                          selected={ this.state.activeStory === '/my' }>
-                Мои Площадки
-              </TabbarItem>
-            </Tabbar>
-            : null}>
+                <TabbarItem onClick={ this.goToPanel('/my') }
+                            selected={ this.state.activeStory === '/my' }>
+                  <Icon24FavoriteOutline/>
+                </TabbarItem>
+
+                <TabbarItem onClick={ this.goToPanel('/notifications') }
+                            selected={ this.state.activeStory === '/notifications' }>
+                  <Icon28Notifications className={ 'l-icon--24' }/>
+                </TabbarItem>
+
+                <TabbarItem onClick={ this.goToPanel('/additional') }
+                            selected={ this.state.activeStory === '/additional' }>
+                  <Icon28Menu className={ 'l-icon--24' }/>
+                </TabbarItem>
+              </Tabbar>
+              : null }>
 
         <View id='/all'
               activePanel={ this.state.activePanel }>
@@ -95,6 +109,16 @@ export class Main extends React.PureComponent {
           <Panel id='/my/edit-space' className='l-panel l-panel--no-tabbar'>
             <EditSpace/>
           </Panel>
+        </View>
+
+        <View id='/notifications'
+              activePanel={ this.state.activePanel }>
+          <Panel id='/notifications'/>
+        </View>
+
+        <View id='/additional'
+              activePanel={ this.state.activePanel }>
+          <Panel id='/additional'/>
         </View>
       </Epic>
     );
