@@ -79,7 +79,6 @@ export class Main extends React.PureComponent {
               </Tabbar>
             }
       >
-
         <View id='/all'
               activePanel={ this.state.activePanel }>
           <Panel id='/all' className="l-panel--full-height">

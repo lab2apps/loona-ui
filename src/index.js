@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import connect from '@vkontakte/vkui-connect';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
+import 'moment/locale/ru';
 
 import { App } from './App';
 import { ScrollToTop } from './components/common/ScrollToTop';

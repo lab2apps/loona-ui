@@ -75,8 +75,18 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
   };
 
   onBookRoomButtonClick = () => {
-    // TODO add params to indicate that we booking room review, not room
-    this.props.history.push(`/my/book-room?id=${ this.props.room.uuid }`);
+    let startDate = '';
+    let endDate   = '';
+
+    if (this.state.startDate) {
+      startDate = this.state.startDate.format('YYYY-MM-DD');
+    }
+
+    if (this.state.endDate) {
+      endDate = this.state.endDate.format('YYYY-MM-DD');
+    }
+
+    this.props.history.push(`/my/book-room?id=${ this.props.room.uuid }&startDate=${startDate}&endDate=${endDate}`);
   };
 
   onBookRoomReviewButtonClick = () => {
@@ -103,91 +113,91 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
     return (
       <React.Fragment>
         <Group>
-          { this.props.room.imageUrls.length > 0 && (
-            <Gallery style={ { height: 150 } }
-                     bullets={ 'dark' }>
-              { this.props.room.imageUrls.map((image, i) => {
-                return <img src={ `${environment.apiUrl}/image/${image}` } key={i} alt="room pics"/>;
-              }) }
+          {this.props.room.imageUrls.length > 0 && (
+            <Gallery style={{ height: 150 }}
+                     bullets={'dark'}>
+              {this.props.room.imageUrls.map((image, i) => {
+                return <img src={`${environment.apiUrl}/image/${image}`} key={i} alt="room pics"/>;
+              })}
             </Gallery>
-          ) }
+          )}
 
           <List>
             <Cell
               size="l"
-              description={ ROOM_TYPES[this.props.room.roomType] }
+              description={ROOM_TYPES[this.props.room.roomType]}
               bottomContent={
-                <div style={ { display: 'flex', paddingTop: '10px' } }>
-                  <Button size="l" stretched style={ { marginRight: 8 } }
-                          onClick={ this.onBookRoomButtonClick }>Бронировать
+                <div style={{ display: 'flex', paddingTop: '10px' }}>
+                  <Button size="l" stretched style={{ marginRight: 8 }}
+                          onClick={this.onBookRoomButtonClick}>Бронировать
                   </Button>
 
 
-                  { this.props.room.mySpace && (
+                  {this.props.room.mySpace && (
                     <Button size="l" stretched level="secondary"
-                            onClick={ this.onEditButtonClick }>Редактировать
+                            onClick={this.onEditButtonClick}>Редактировать
                     </Button>
-                  ) }
+                  )}
 
-                  { !this.props.room.mySpace && (
+                  {!this.props.room.mySpace && (
                     <Button size="l" stretched level="secondary"
-                            onClick={ this.onBookRoomReviewButtonClick }>На просмотр
+                            onClick={this.onBookRoomReviewButtonClick}>На просмотр
                     </Button>
-                  ) }
+                  )}
                 </div>
 
               }>
-              { this.props.room.name }
+              {this.props.room.name}
             </Cell>
           </List>
         </Group>
 
         <Group>
           <List>
-            { this.props.room.description && (
+            {this.props.room.description && (
               <Cell>
                 <InfoRow title="Описание места">
-                  <div style={ { whiteSpace: 'initial' } }>
-                    { this.props.room.description }
+                  <div style={{ whiteSpace: 'initial' }}>
+                    {this.props.room.description}
                   </div>
                 </InfoRow>
 
               </Cell>
-            ) }
+            )}
 
 
             <Cell>
               <div className='l-flex'>
-                { this.props.room.footage &&
+                {this.props.room.footage &&
                 <InfoRow title="Метраж" className="l-flex__item">
-                  { this.props.room.footage }м
+                  {this.props.room.footage}м
                 </InfoRow>
                 }
 
-                { this.props.room.floor &&
+                {this.props.room.floor &&
                 <InfoRow title="Этаж" className="l-flex__item">
-                  { this.props.room.floor }
+                  {this.props.room.floor}
                 </InfoRow>
                 }
 
-                { this.props.room.price &&
+                {this.props.room.price &&
                 <InfoRow title="Цена" className="l-flex__item">
-                  { this.props.room.price } ₽
+                  {this.props.room.price} ₽
                 </InfoRow>
                 }
               </div>
             </Cell>
 
 
-            { this.props.room.options.length > 0 && (
+            {this.props.room.options.length > 0 && (
               <Cell>
                 <InfoRow title="Дополнительные удобства">
-                  <div style={ { whiteSpace: 'initial' } }>
-                    { this.props.room.options.map((item) => OPTIONS[item]).join(', ') }
+                  <div style={{ whiteSpace: 'initial' }}>
+                    {this.props.room.options.map((item) => OPTIONS[item]).join(', ')}
                   </div>
                 </InfoRow>
               </Cell>
-            ) }
+            )}
           </List>
         </Group>
 
@@ -201,20 +211,21 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
 
           <Div>
             <div hidden>
-              <input type="text" name="start date" value={ startDateString } readOnly/>
-              <input type="text" name="end date" value={ endDateString } readOnly/>
+              <input type="text" name="start date" value={startDateString} readOnly/>
+              <input type="text" name="end date" value={endDateString} readOnly/>
             </div>
 
             <div className="l-centralizer l-border-box">
               <DayPickerRangeController
-                onPrevMonthClick={ this.onMonthChange }
-                onNextMonthClick={ this.onMonthChange }
-                onDatesChange={ this.onDatesChange }
-                onFocusChange={ this.onFocusChange }
-                isDayBlocked={ (day) => this.isDateBlocked(day) }
-                focusedInput={ focusedInput }
-                startDate={ startDate }
-                endDate={ endDate }
+                onPrevMonthClick={this.onMonthChange}
+                onNextMonthClick={this.onMonthChange}
+                onDatesChange={this.onDatesChange}
+                onFocusChange={this.onFocusChange}
+                isDayBlocked={(day) => this.isDateBlocked(day)}
+                minimumNights={0}
+                focusedInput={focusedInput}
+                startDate={startDate}
+                endDate={endDate}
               />
             </div>
           </Div>
@@ -223,7 +234,7 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
             <Button
               size="xl"
               level="primary"
-              onClick={ this.onBookRoomButtonClick }>
+              onClick={this.onBookRoomButtonClick}>
               Бронировать
             </Button>
           </Div>
