@@ -20,7 +20,7 @@ type EditSpaceFormProps = {
 export class EditSpaceForm extends React.PureComponent<EditSpaceFormProps> {
   render () {
     return (
-      <FormLayout className=".l-bg-white">
+      <FormLayout className="l-bg-white">
 
         <Input type="text"
                top="Название площадки"
@@ -67,7 +67,7 @@ export class EditSpaceForm extends React.PureComponent<EditSpaceFormProps> {
           и пространства
         </Div>
 
-        <Checkbox>Согласен со всем <Link>этим</Link></Checkbox>
+        <Checkbox>Согласен с <Link>правилами сервиса</Link></Checkbox>
 
         <Button size="xl" level="primary">Создать площадку</Button>
 
