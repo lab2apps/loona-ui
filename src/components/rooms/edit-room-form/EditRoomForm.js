@@ -59,10 +59,6 @@ export class EditRoomForm extends React.PureComponent<EditRoomFormProps> {
 
         <Textarea top="Описание места"/>
 
-        <Input type="text"
-               top="Как добраться"
-               placeholder="Введите уточняющую информацию"/>
-
         <div class="l-flex">
           <div class="l-flex__item">
             <div class="FormLayout__row-top">Этаж</div>
