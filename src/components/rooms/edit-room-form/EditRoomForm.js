@@ -90,7 +90,7 @@ export class EditRoomForm extends React.PureComponent<EditRoomFormProps> {
         </div>
 
         <FormLayoutGroup top="Цена" className="l-flex">
-          <Input type="text"
+          <Input type="tel"
                  top="Цена"
                  name={ 'price' }
                  className="l-flex__item"
