@@ -60,16 +60,17 @@ export class MySpaces extends React.PureComponent {
           <Tabs>
             <TabsItem
               onClick={ () => {
-                this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.LIST_VIEW });
+                this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.SUBSCRIPTIONS });
               } }
-              selected={ this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.LIST_VIEW }>
+              selected={ this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.SUBSCRIPTIONS }>
               Подписки
             </TabsItem>
+
             <TabsItem
               onClick={ () => {
-                this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.MAP_VIEW });
+                this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.MY_SPACES });
               } }
-              selected={ this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW }>
+              selected={ this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MY_SPACES }>
               Созданные мной
             </TabsItem>
           </Tabs>
