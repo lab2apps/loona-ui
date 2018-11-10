@@ -1,14 +1,14 @@
 import React from 'react';
 import {
   Button,
-  Cell, CellButton,
-  Div, Group, InfoRow, List, PanelHeader, Tabs, TabsItem,
+  Cell,
+  Div,
+  Group,
+  InfoRow,
+  List,
 } from '@vkontakte/vkui';
-import { SpacesList } from '../../spaces/spaces-list/SpacesList';
-import Icon24About from '@vkontakte/icons/dist/24/about';
-import Icon24Place from '@vkontakte/icons/dist/24/place';
-import { RoomsList } from '../rooms-list/RoomsList';
-import Icon24Add from '@vkontakte/icons/dist/24/add';
+import { DateRangePicker, SingleDatePicker, DayPickerRangeController} from 'react-dates';
+import { START_DATE, END_DATE } from 'react-dates/src/constants';
 
 type RoomInfo = {}
 
@@ -17,7 +17,33 @@ type RoomDetailsProps = {
 }
 
 export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
+
+  state = {
+    focusedInput: START_DATE,
+    startDate: null,
+    endDate: null,
+  };
+
+  onDatesChange = ({ startDate, endDate }) => {
+    console.warn('onDatesChange',{ startDate, endDate });
+    this.setState({ startDate, endDate });
+  };
+
+  onFocusChange = (focusedInput) => {
+    console.warn('onFocusChange',focusedInput);
+    this.setState({
+      // Force the focusedInput to always be truthy so that dates are always selectable
+      focusedInput: !focusedInput ? START_DATE : focusedInput,
+    });
+  };
+
+
   render () {
+    const { focusedInput, startDate, endDate } = this.state;
+    const startDateString = startDate ? startDate.format('YYYY-MM-DD') : '';
+    const endDateString = endDate ? endDate.format('YYYY-MM-DD') : '';
+
+
     return (
       <React.Fragment>
 
@@ -67,13 +93,32 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
           </List>
         </Group>
 
-        <Group description="description">
+        <Group>
+          <List>
+            <Cell>
+              <InfoRow title="Доступность"></InfoRow>
+            </Cell>
+          </List>
 
-          hello
+          <Div>
+
+            <input type="text" name="start date" value={startDateString} readOnly />
+            <input type="text" name="end date" value={endDateString} readOnly />
+
+            <DayPickerRangeController
+              onDatesChange={this.onDatesChange}
+              onFocusChange={this.onFocusChange}
+              focusedInput={focusedInput}
+              startDate={startDate}
+              endDate={endDate}
+            />
+
+          </Div>
+
+          <Div>
+            <Button size="xl" level="primary">Бронировать</Button>
+          </Div>
         </Group>
-
-        <Div top="sdfvsdfv"></Div>
-
 
         <pre>
           {JSON.stringify(this.props.room, null, 2)}

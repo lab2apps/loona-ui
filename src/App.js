@@ -1,3 +1,6 @@
+import 'react-dates/initialize'; // <- HAVE TO BE ON FIRST PLACE
+import 'react-dates/lib/css/_datepicker.css';
+
 import React, { Component } from 'react';
 import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
