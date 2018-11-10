@@ -12,6 +12,7 @@ type ImageUploaderProps = {
   top: string;
   name: string;
   label: string;
+  uploadedFiles?: any;
 };
 
 const itemStyle = {
@@ -30,6 +31,23 @@ export class ImageUploader extends React.PureComponent<ImageUploaderProps> {
     value: '',
     files: [],
   };
+
+  componentDidMount () {
+    if (this.props.uploadedFiles) {
+      this.setState({
+        value: this.props.uploadedFiles,
+        files: this.props.uploadedFiles.map((id) => {
+          return {
+            fetching: false,
+            file: {
+              name: id,
+            },
+            id,
+          };
+        }),
+      });
+    }
+  }
 
   handleChange = (event) => {
     const files = [
