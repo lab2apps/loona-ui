@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import connect from '@vkontakte/vkui-connect';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 import { App } from './App';
 import { ScrollToTop } from './components/common/ScrollToTop';
@@ -17,11 +17,11 @@ const AppStore = configureStore();
 const render = (Component) => {
   ReactDOM.render(
     <Provider store={ AppStore }>
-        <BrowserRouter>
+        <HashRouter>
           <ScrollToTop>
             <Component/>
           </ScrollToTop>
-        </BrowserRouter>
+        </HashRouter>
     </Provider>,
     rootElement,
   );
