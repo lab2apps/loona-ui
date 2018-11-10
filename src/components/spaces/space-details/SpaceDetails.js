@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import {
   Div,
   Button,
@@ -8,6 +9,7 @@ import {
   Tabs,
   TabsItem,
   InfoRow,
+  CellButton,
 } from '@vkontakte/vkui';
 import { RoomsList } from '../../rooms/rooms-list/RoomsList';
 import { removeSpace } from '../../../store/actions/spaceActions';
@@ -16,7 +18,7 @@ import { connect } from 'react-redux';
 
 import Icon24About from '@vkontakte/icons/dist/24/about';
 import Icon24Place from '@vkontakte/icons/dist/24/place';
-import { Link, withRouter } from 'react-router-dom';
+import Icon24Add from '@vkontakte/icons/dist/24/add';
 
 const SPACE_DETAILS_TABS = {
   ALL_ROOMS: 'ALL_ROOMS',
@@ -80,8 +82,9 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
 
                 // FOR OWNER ONLY
                 <div style={{ display: 'flex', paddingTop: '10px' }}>
-                  <Button size="l" stretched style={{ marginRight: 8 }} onClick={ this.onMessageButtonClick }>Сообщение</Button>
-                  <Button size="l" stretched level="secondary" onClick={ this.onEditButtonClick }>Редактировать</Button>
+                  <Button size="l" stretched style={{ marginRight: 8 }}
+                          onClick={this.onMessageButtonClick}>Сообщение</Button>
+                  <Button size="l" stretched level="secondary" onClick={this.onEditButtonClick}>Редактировать</Button>
                 </div>
 
               }>
@@ -115,50 +118,54 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
               </Tabs>
             </Cell>
 
-          {
-            (this.state.selectedTab === SPACE_DETAILS_TABS.ALL_ROOMS) &&
-            <RoomsList>
-            </RoomsList>
-          }
+            {
+              (this.state.selectedTab === SPACE_DETAILS_TABS.ALL_ROOMS) &&
 
-          {
+              <React.Fragment>
+                <RoomsList>
+                </RoomsList>
 
-            (this.state.selectedTab === SPACE_DETAILS_TABS.ABOUT_SPACE) &&
-            <React.Fragment>
-              <Cell>
-                <InfoRow title="Описание площадки">
-                  Культурный и деловой порт в Гавани В.О. Если чо, это гребанное многострочное поле
-                </InfoRow>
-              </Cell>
+                <Cell>
+                  <CellButton
+                    align="center"
+                    before={<Icon24Add/>}
+                    onClick={this.onCreateRoomButtonClick}>
+                    Добавить родственника
+                  </CellButton>
+                </Cell>
+              </React.Fragment>
+            }
 
-              <Cell>
-                <InfoRow title="Телефон для связи">
-                  +7 812 213-32-02
-                </InfoRow>
-              </Cell>
+            {
+              (this.state.selectedTab === SPACE_DETAILS_TABS.ABOUT_SPACE) &&
+              <React.Fragment>
+                <Cell>
+                  <InfoRow title="Описание площадки">
+                    Культурный и деловой порт в Гавани В.О. Если чо, это гребанное многострочное поле
+                  </InfoRow>
+                </Cell>
 
-              <Cell>
-                <InfoRow title="Дни работы площадки">
-                  Ежедневно
-                </InfoRow>
-              </Cell>
+                <Cell>
+                  <InfoRow title="Телефон для связи">
+                    +7 812 213-32-02
+                  </InfoRow>
+                </Cell>
 
-              <Cell>
-                <InfoRow title="Время работы площадки">
-                  11:00 — 23:00
-                </InfoRow>
-              </Cell>
-            </React.Fragment>
+                <Cell>
+                  <InfoRow title="Дни работы площадки">
+                    Ежедневно
+                  </InfoRow>
+                </Cell>
 
-          }
+                <Cell>
+                  <InfoRow title="Время работы площадки">
+                    11:00 — 23:00
+                  </InfoRow>
+                </Cell>
+              </React.Fragment>
+            }
           </List>
         </Group>
-
-        <Button onClick={this.onCreateRoomButtonClick}>
-          Добавить помещение
-        </Button>
-
-
 
 
         <pre>
