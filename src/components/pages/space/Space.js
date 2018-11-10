@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Div, PanelHeader,
+  PanelHeader,
 } from '@vkontakte/vkui';
 import { SpaceDetails } from '../../spaces/space-details/SpaceDetails';
 import { getSpace } from '../../../store/actions/spaceActions';

@@ -2,9 +2,8 @@ import React from 'react';
 import {
   Avatar,
   Cell,
-  Div,
 } from '@vkontakte/vkui';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { environment } from '../../../config/environment';
 
 type RoomData = {

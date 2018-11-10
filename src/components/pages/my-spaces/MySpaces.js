@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { PanelHeader, Div, List, FixedLayout, Search, Tabs, TabsItem, CellButton, Cell } from '@vkontakte/vkui';
+import { PanelHeader, List, FixedLayout, Tabs, TabsItem, CellButton, Cell } from '@vkontakte/vkui';
 
 import { SpacesList } from '../../spaces/spaces-list/SpacesList';
 import { bindActionCreators } from 'redux';

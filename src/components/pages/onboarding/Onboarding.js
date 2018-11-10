@@ -57,7 +57,7 @@ export class Onboarding extends React.PureComponent {
               return (
                 <div className='l-onboarding__item'
                      key={ index }>
-                  <img src={ item.image } className='l-onboarding__image'/>
+                  <img src={ item.image } className='l-onboarding__image' alt="onboarding pics"/>
 
                   <div className='l-onboarding__title'>
                     { item.title }

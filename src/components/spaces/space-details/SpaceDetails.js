@@ -87,7 +87,7 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
             <Gallery style={ { height: 150 } }
                      bullets={ 'dark' }>
               { this.props.space.imageUrls.map((image) => {
-                return <img src={ `${environment.apiUrl}/image/${image}` }/>;
+                return <img src={ `${environment.apiUrl}/image/${image}` } alt="space pics"/>;
               }) }
             </Gallery>
           ) }

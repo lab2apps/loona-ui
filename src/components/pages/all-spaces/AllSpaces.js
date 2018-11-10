@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Div, FixedLayout, PanelHeader, Search, Tabs, TabsItem } from '@vkontakte/vkui';
+import { FixedLayout, PanelHeader, Search, Tabs, TabsItem } from '@vkontakte/vkui';
 import { SpacesList } from '../../spaces/spaces-list/SpacesList';
 import { getSpaces } from '../../../store/actions/spaceActions';
 import { MapView } from '../../common/MapView';

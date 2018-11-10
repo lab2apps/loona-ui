@@ -1,9 +1,7 @@
 import React from 'react';
 import {
-  Div, Group, PanelHeader, HeaderButton, IOS, platform,
+  PanelHeader, HeaderButton, IOS, platform,
 } from '@vkontakte/vkui';
-import Icon24About from '@vkontakte/icons/dist/24/about';
-import { RoomDetails } from '../../rooms/room-details/RoomDetails';
 import { RoomBooking } from '../../rooms/room-booking/RoomBooking';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';

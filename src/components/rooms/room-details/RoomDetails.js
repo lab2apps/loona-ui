@@ -7,8 +7,8 @@ import {
   InfoRow,
   List,
 } from '@vkontakte/vkui';
-import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
-import { START_DATE, END_DATE } from 'react-dates/src/constants';
+import { DayPickerRangeController } from 'react-dates';
+import { START_DATE } from 'react-dates/src/constants';
 import { ROOM_TYPES } from '../../../contants/ROOM_TYPES';
 import { OPTIONS } from '../../../contants/OPTIONS';
 import { withRouter } from 'react-router-dom';
@@ -106,8 +106,8 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
           { this.props.room.imageUrls.length > 0 && (
             <Gallery style={ { height: 150 } }
                      bullets={ 'dark' }>
-              { this.props.room.imageUrls.map((image) => {
-                return <img src={ `${environment.apiUrl}/image/${image}` }/>;
+              { this.props.room.imageUrls.map((image, i) => {
+                return <img src={ `${environment.apiUrl}/image/${image}` } key={i} alt="room pics"/>;
               }) }
             </Gallery>
           ) }
@@ -207,7 +207,6 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
 
             <div className="l-centralizer l-border-box">
               <DayPickerRangeController
-                withFullScreenPortal={ true }
                 onPrevMonthClick={ this.onMonthChange }
                 onNextMonthClick={ this.onMonthChange }
                 onDatesChange={ this.onDatesChange }

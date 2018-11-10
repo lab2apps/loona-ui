@@ -55,7 +55,8 @@ export class Main extends React.PureComponent {
 
     return (
       <Epic activeStory={ this.state.activeStory }
-            tabbar={ hasTabbar ? <Tabbar>
+            tabbar={
+              <Tabbar className={ hasTabbar ? '' : 'l-hidden' }>
                 <TabbarItem onClick={ this.goToPanel('/all') }
                             selected={ this.state.activeStory === '/all' }>
                   <Icon28Newsfeed className={ 'l-icon--24' }/>
@@ -76,7 +77,8 @@ export class Main extends React.PureComponent {
                   <Icon28Menu className={ 'l-icon--24' }/>
                 </TabbarItem>
               </Tabbar>
-              : null }>
+            }
+      >
 
         <View id='/all'
               activePanel={ this.state.activePanel }>

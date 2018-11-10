@@ -102,17 +102,17 @@ export class EditRoomForm extends React.PureComponent<EditRoomFormProps> {
         <Textarea top="Описание места" name={ 'description' }
                   defaultValue={ this.props.room && this.props.room.description }/>
 
-        <div class="l-flex">
-          <div class="l-flex__item">
-            <div class="FormLayout__row-top">Этаж</div>
+        <div className="l-flex">
+          <div className="l-flex__item">
+            <div className="FormLayout__row-top">Этаж</div>
             <Input type="tel"
                    top="Этаж"
                    defaultValue={ this.props.room && this.props.room.floor }
                    name={ 'floor' }
                    placeholder="Выберите этаж"/>
           </div>
-          <div class="l-flex__item">
-            <div class="FormLayout__row-top">Метраж</div>
+          <div className="l-flex__item">
+            <div className="FormLayout__row-top">Метраж</div>
             <Input type="tel"
                    top="Метраж"
                    defaultValue={ this.props.room && this.props.room.footage }
@@ -130,9 +130,9 @@ export class EditRoomForm extends React.PureComponent<EditRoomFormProps> {
                  className="l-flex__item"
                  placeholder="Введите цену"/>
 
-          <div class="l-text-gray">/</div>
+          <div className="l-text-gray">/</div>
 
-          <Select defaultValue={ this.props.room && this.props.room.rentType || 'day' } className="l-flex__item"
+          <Select defaultValue={ (this.props.room && this.props.room.rentType) || 'day' } className="l-flex__item"
                   style={ { paddingTop: 0 } }
                   name='rentType'>
             <option value="month">Месяц</option>

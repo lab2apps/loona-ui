@@ -124,10 +124,10 @@ export class EditSpaceForm extends React.PureComponent<EditSpaceFormProps> {
           top="Дни работы площадки"
           className="l-time-range">
           <Input className='l-time-range__input' type="time"
-                 defaultValue={ this.props.space && this.props.space.startWorkTime || '09:00' }
+                 defaultValue={ (this.props.space && this.props.space.startWorkTime) || '09:00' }
                  name='startWorkTime'/>
           <Input className='l-time-range__input' type="time"
-                 defaultValue={ this.props.space && this.props.space.endWorkTime || '20:00' }
+                 defaultValue={ (this.props.space && this.props.space.endWorkTime) || '20:00' }
                  name={ 'endWorkTime' }/>
         </FormLayoutGroup>
 

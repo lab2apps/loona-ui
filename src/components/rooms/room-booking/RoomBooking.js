@@ -7,8 +7,8 @@ import {
   InfoRow,
   List,
 } from '@vkontakte/vkui';
-import { DateRangePicker, SingleDatePicker, DayPickerRangeController} from 'react-dates';
-import { START_DATE, END_DATE } from 'react-dates/src/constants';
+import { DayPickerRangeController} from 'react-dates';
+import { START_DATE } from 'react-dates/src/constants';
 
 import Icon24About from '@vkontakte/icons/dist/24/about';
 import Icon24Flash from '@vkontakte/icons/dist/24/flash';
@@ -117,9 +117,8 @@ export class RoomBooking extends React.PureComponent<RoomDetailsProps> {
               <input type="text" name="end date" value={endDateString} readOnly />
             </div>
 
-            <div class="l-centralizer l-border-box">
+            <div className="l-centralizer l-border-box">
               <DayPickerRangeController
-                withFullScreenPortal={true}
                 onDatesChange={this.onDatesChange}
                 onFocusChange={this.onFocusChange}
                 focusedInput={focusedInput}
