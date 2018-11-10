@@ -149,14 +149,16 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
               <React.Fragment>
                 { this.props.rooms.rooms && <RoomsList rooms={ this.props.rooms.rooms }/> }
 
-                <Cell>
-                  <CellButton
-                    align="center"
-                    before={ <Icon24Add/> }
-                    onClick={ this.onCreateRoomButtonClick }>
-                    Добавить место
-                  </CellButton>
-                </Cell>
+                { this.props.space.mySpace && (
+                  <Cell>
+                    <CellButton
+                      align="center"
+                      before={ <Icon24Add/> }
+                      onClick={ this.onCreateRoomButtonClick }>
+                      Добавить место
+                    </CellButton>
+                  </Cell>
+                ) }
               </React.Fragment>
             }
 

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { environment } from '../config/environment';
 
 export class RoomApiService {
-  static getAll ({ filter  } = {}) {
+  static getAll ({ filter } = {}) {
     return axios.get(`${environment.apiUrl}/api/rooms`, {
       params: {
         ...filter,
@@ -39,6 +39,19 @@ export class RoomApiService {
   static remove (id) {
     return axios.delete(`${environment.apiUrl}/api/room/${id}`)
       .then(response => {
+        return response.data;
+      });
+  }
+
+  static getOrders (roomId, fromDate, toDate) {
+    return axios.get(`${environment.apiUrl}/api/order`, {
+      params: {
+        roomId,
+        fromDate: fromDate.format('YYYY-MM-DD'),
+        toDate: toDate.format('YYYY-MM-DD'),
+      },
+    })
+      .then((response) => {
         return response.data;
       });
   }
