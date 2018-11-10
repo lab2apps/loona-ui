@@ -8,10 +8,8 @@ import {
   Select,
   Textarea,
   Div,
-  File,
 } from '@vkontakte/vkui';
 
-import Icon24Camera from '@vkontakte/icons/dist/24/camera';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSpace } from '../../../store/actions/spaceActions';

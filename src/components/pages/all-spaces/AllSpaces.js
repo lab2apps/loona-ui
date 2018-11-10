@@ -40,7 +40,7 @@ export class AllSpaces extends React.PureComponent {
 
         {
           (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.LIST_VIEW) &&
-          <div style={ { padding: '48px 0 96px'} }>
+          <div style={ { padding: '60px 0 96px'} }>
             <SpacesList spaces={ this.props.spaces }>
             </SpacesList>
           </div>
