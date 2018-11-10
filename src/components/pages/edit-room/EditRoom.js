@@ -11,18 +11,23 @@ export class EditRoom extends React.PureComponent {
     return queryString.parse(this.props.location.search).id;
   }
 
+  get spaceId () {
+    return queryString.parse(this.props.location.search).spaceId;
+  }
+
   componentDidMount () {
-    console.warn('roomId', this.roomId)
+    console.warn('roomId', this.roomId);
   }
 
   render () {
     return (
       <React.Fragment>
         <PanelHeader>
-          {this.roomId ? 'Изменить' : 'Создать'} помещение
+          { this.roomId ? 'Изменить' : 'Создать' } помещение
         </PanelHeader>
 
-        <EditRoomForm roomId={ this.roomId }>
+        <EditRoomForm roomId={ this.roomId }
+                      spaceId={ this.spaceId }>
         </EditRoomForm>
 
       </React.Fragment>
