@@ -1,6 +1,6 @@
 import React from 'react';
 import { PanelHeader, Gallery, Button, View, Panel } from '@vkontakte/vkui';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 

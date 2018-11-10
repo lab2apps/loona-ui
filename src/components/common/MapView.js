@@ -1,5 +1,5 @@
 import React from 'react';
-import { YMaps as YMapsContainer, Map as YMap, Placemark } from 'react-yandex-maps';
+import { YMaps as YMapsContainer, Map as YMap } from 'react-yandex-maps';
 
 type MavViewProps = {}
 
@@ -47,10 +47,9 @@ export class MapView extends React.PureComponent<MavViewProps> {
 
   render () {
     return (
-      this.state.currentCoords && <React.Fragment>
-        <YMapsContainer>
+      <React.Fragment>
+        <YMapsContainer version=''>
           <YMap defaultState={this.state.mapOptions} instanceRef={this.mapRef} width="100%" height="100%">
-            <Placemark geometry={this.state.mapOptions.center}/>
           </YMap>
         </YMapsContainer>
       </React.Fragment>
