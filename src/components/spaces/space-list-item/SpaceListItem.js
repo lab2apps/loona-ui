@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-  Div,
+  Cell,
+  Avatar,
 } from '@vkontakte/vkui';
 import { Link, withRouter } from 'react-router-dom';
 
@@ -15,11 +16,17 @@ type SpaceListItemProps = {
 
 @withRouter
 export class SpaceListItem extends React.PureComponent<SpaceListItemProps> {
+  go = () => {
+    this.props.history.push(`/${this.props.location.pathname.split('/')[1]}/space-details?id=${ this.props.space.id }`);
+  };
+
   render () {
     return (
-      <Div>
-        <Link to={ `/${this.props.location.pathname.split('/')[1]}/space-details?id=${ this.props.space.id }` }>Space list item</Link>
-      </Div>
+      <Cell before={ <Avatar type={'app'} size={80}/> }
+            onClick={ this.go }
+            description={ this.props.space.type }>
+        { this.props.space.name }
+      </Cell>
     );
   }
 }
