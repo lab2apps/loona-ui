@@ -102,7 +102,7 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
                   <Button size="l" stretched style={ { marginRight: 8 } }
                           onClick={ this.onMessageButtonClick }>Сообщение</Button>
                   { this.props.space.mySpace ? (<Button size="l" stretched level="secondary"
-                                                        onClick={ this.onEditButtonClick }>Изменить</Button>) : (
+                                                        onClick={ this.onEditButtonClick }>Редактировать</Button>) : (
                     <Button size="l" stretched level="secondary"
                             onClick={ this.addToFavorites }>В избранное</Button>
                   ) }
