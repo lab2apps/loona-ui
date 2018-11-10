@@ -16,6 +16,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSpace } from '../../../store/actions/spaceActions';
 import { serialize } from '../../../utils/serialize';
+import { ImageUploader } from '../../image-uploader/ImageUploader';
 
 type EditSpaceFormProps = {
   spaceId?: number,
@@ -45,14 +46,9 @@ export class EditSpaceForm extends React.PureComponent<EditSpaceFormProps> {
           <option value="2">Бизнес-центр</option>
         </Select>
 
-        <File top="Добавить фото" before={ <Icon24Camera/> } size="l">
-          Открыть галерею
-        </File>
-
-        <Input type='text'
-               style={ { display: 'none' } }
-               name='imageUrls'
-               value={ 'https://www.google.ru/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png,https://www.google.ru/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png' }/>
+        <ImageUploader name={ 'imageUrls' }
+                       label={ 'Открыть галерею' }
+                       top={ 'Добавить фото' }/>
 
         <Textarea top="Описание площадки" name={ 'description' }/>
 

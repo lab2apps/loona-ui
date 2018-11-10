@@ -4,6 +4,7 @@ import { environmentProd } from './environmentProd';
 export type Environment = {
   isLoggerEnabled: boolean;
   apiUrl: string;
+  skipToken?: boolean;
 }
 
 export let environment: Environment;

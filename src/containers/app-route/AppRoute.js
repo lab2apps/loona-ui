@@ -4,6 +4,7 @@ import { Redirect, Route, withRouter } from 'react-router-dom';
 
 import { SplashScreen } from '../../components/splash-screen/SplashScreen';
 import type { RootState } from '../../store/reducers/rootReducer';
+import { environment } from '../../config/environment';
 
 type SplashScreenRouteProps = {
   userId: string;
@@ -32,7 +33,7 @@ class SplashScreenRoute extends React.Component<SplashScreenRouteProps> {
     const Component = this.props.component;
     const props     = this.props.props;
 
-    if (!this.props.token || this.state.delay) {
+    if ((!this.props.token || this.state.delay) && !environment.skipToken) {
       return <SplashScreen/>;
     }
 
