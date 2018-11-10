@@ -9,6 +9,7 @@ import { AllSpaces } from '../all-spaces/AllSpaces';
 import { MySpaces } from '../my-spaces/MySpaces';
 import { Space } from '../space/Space';
 import { EditRoom } from '../edit-room/EditRoom';
+import { Booking } from '../booking/Booking';
 
 import Icon28Newsfeed from '@vkontakte/icons/dist/28/newsfeed';
 import Icon24FavoriteOutline from '@vkontakte/icons/dist/24/favorite_outline';
@@ -112,6 +113,10 @@ export class Main extends React.PureComponent {
 
           <Panel id='/my/edit-room' className='l-panel l-panel--no-tabbar'>
             <EditRoom/>
+          </Panel>
+
+          <Panel id='/my/book-room' className='l-panel l-panel--no-tabbar'>
+            <Booking/>
           </Panel>
         </View>
 
