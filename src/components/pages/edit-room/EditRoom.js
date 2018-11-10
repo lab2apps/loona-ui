@@ -1,8 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
-import { PanelHeader } from '@vkontakte/vkui';
+import { HeaderButton, IOS, PanelHeader, platform } from '@vkontakte/vkui';
 import { EditRoomForm } from '../../rooms/edit-room-form/EditRoomForm';
+import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
+import Icon24Back from '@vkontakte/icons/dist/24/back';
+
+const osname = platform();
 
 @withRouter
 export class EditRoom extends React.PureComponent {
@@ -22,7 +26,9 @@ export class EditRoom extends React.PureComponent {
   render () {
     return (
       <React.Fragment>
-        <PanelHeader>
+        <PanelHeader  addon={ <HeaderButton onClick={ this.props.history.goBack }>Назад</HeaderButton> }
+                      left={ <HeaderButton onClick={ this.props.history.goBack }>{ osname === IOS ?
+                        <Icon28ChevronBack/> : <Icon24Back/> }</HeaderButton> }>
           { this.roomId ? 'Изменить' : 'Создать' } помещение
         </PanelHeader>
 
