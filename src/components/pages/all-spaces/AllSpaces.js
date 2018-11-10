@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Div, FixedLayout, PanelHeader, Search, Tabs, TabsItem } from '@vkontakte/vkui';
 import { SpacesList } from '../../spaces/spaces-list/SpacesList';
+import { MapView } from '../../common/MapView';
 
 const SPACES_VIEW_TYPES = {
   LIST_VIEW: 'LIST',
@@ -31,10 +32,19 @@ export class AllSpaces extends React.PureComponent {
 
         <Div style={ {padding: '60px 0'} }>
           {
-            this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.LIST_VIEW
-              ? <SpacesList>
-              </SpacesList>
-              : <div>Map view</div>
+            (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.LIST_VIEW) &&
+              <React.Fragment>
+                <SpacesList>
+                </SpacesList>
+              </React.Fragment>
+          }
+
+          {
+            (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW) &&
+              <React.Fragment>
+                <MapView>
+                </MapView>
+              </React.Fragment>
           }
         </Div>
 

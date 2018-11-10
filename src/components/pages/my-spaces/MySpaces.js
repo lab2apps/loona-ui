@@ -6,15 +6,15 @@ import { SpacesList } from '../../spaces/spaces-list/SpacesList';
 import { SpaceListItem } from '../../spaces/space-list-item/SpaceListItem';
 
 const SPACES_VIEW_TYPES = {
-  LIST_VIEW: 'LIST',
-  MAP_VIEW: 'MAP',
+  SUBSCRIPTIONS: 'LIST',
+  MY_SPACES: 'MAP',
 };
 
 @withRouter
 export class MySpaces extends React.PureComponent {
 
   state = {
-    selectedSpacesViewType: SPACES_VIEW_TYPES.LIST_VIEW,
+    selectedSpacesViewType: SPACES_VIEW_TYPES.SUBSCRIPTIONS,
   };
 
   componentDidMount () {
@@ -28,14 +28,10 @@ export class MySpaces extends React.PureComponent {
           Мои площадки
         </PanelHeader>
 
-        <FixedLayout vertical="top">
-          <Search/>
-        </FixedLayout>
-
-        <Div style={{ padding: '60px 0' }}>
+        <Div style={{ padding: '0 0 60px' }}>
 
           {
-            (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.LIST_VIEW) &&
+            (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.SUBSCRIPTIONS) &&
             <React.Fragment>
               <SpacesList>
               </SpacesList>
@@ -43,7 +39,7 @@ export class MySpaces extends React.PureComponent {
           }
 
           {
-            (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW) &&
+            (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MY_SPACES) &&
             <React.Fragment>
               <SpacesList>
               </SpacesList>
@@ -56,23 +52,22 @@ export class MySpaces extends React.PureComponent {
               </Button>
             </React.Fragment>
           }
-
         </Div>
 
         <FixedLayout vertical="bottom">
           <Tabs>
             <TabsItem
               onClick={() => {
-                this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.LIST_VIEW })
+                this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.SUBSCRIPTIONS })
               }}
-              selected={this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.LIST_VIEW}>
+              selected={this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.SUBSCRIPTIONS}>
               Подписки
             </TabsItem>
             <TabsItem
               onClick={() => {
-                this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.MAP_VIEW })
+                this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.MY_SPACES })
               }}
-              selected={this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW}>
+              selected={this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MY_SPACES}>
               Созданные мной
             </TabsItem>
           </Tabs>
