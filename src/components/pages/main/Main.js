@@ -12,7 +12,7 @@ import { Space } from '../space/SpaceDetails';
 import './main.scss';
 
 
-import Icon24Home from '@vkontakte/icons/dist/24/home';
+import Icon28Newsfeed from '@vkontakte/icons/dist/28/newsfeed';
 import Icon24FavoriteOutline from '@vkontakte/icons/dist/24/favorite_outline';
 import Icon28Notifications from '@vkontakte/icons/dist/28/notifications';
 import Icon28Menu from '@vkontakte/icons/dist/28/menu';
@@ -57,7 +57,7 @@ export class Main extends React.PureComponent {
             tabbar={ hasTabbar ? <Tabbar>
                 <TabbarItem onClick={ this.goToPanel('/all') }
                             selected={ this.state.activeStory === '/all' }>
-                  <Icon24Home/>
+                  <Icon28Newsfeed className={ 'l-icon--24' }/>
                 </TabbarItem>
 
                 <TabbarItem onClick={ this.goToPanel('/my') }
