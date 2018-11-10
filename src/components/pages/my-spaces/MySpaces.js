@@ -3,7 +3,9 @@ import { withRouter } from 'react-router-dom';
 import { PanelHeader, Div, Button, FixedLayout, Search, Tabs, TabsItem } from '@vkontakte/vkui';
 
 import { SpacesList } from '../../spaces/spaces-list/SpacesList';
-import { SpaceListItem } from '../../spaces/space-list-item/SpaceListItem';
+import { bindActionCreators } from 'redux';
+import { getMySpaces } from '../../../store/actions/spaceActions';
+import connect from 'react-redux/es/connect/connect';
 
 const SPACES_VIEW_TYPES = {
   SUBSCRIPTIONS: 'LIST',
@@ -11,6 +13,7 @@ const SPACES_VIEW_TYPES = {
 };
 
 @withRouter
+@connect(mapStateToProps, mapDispatchToProps)
 export class MySpaces extends React.PureComponent {
 
   state = {
@@ -18,7 +21,7 @@ export class MySpaces extends React.PureComponent {
   };
 
   componentDidMount () {
-    console.warn('spaceId', this.spaceId);
+    this.props.getMySpaces();
   }
 
   render () {
@@ -32,7 +35,7 @@ export class MySpaces extends React.PureComponent {
           {
             (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.SUBSCRIPTIONS) &&
             <React.Fragment>
-              <SpacesList>
+              <SpacesList spaces={ this.props.spaces }>
               </SpacesList>
             </React.Fragment>
           }
@@ -40,13 +43,13 @@ export class MySpaces extends React.PureComponent {
           {
             (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MY_SPACES) &&
             <React.Fragment>
-              <SpacesList>
+              <SpacesList spaces={ this.props.spaces }>
               </SpacesList>
               <Button size='xl'
-                      onClick={() => {
+                      onClick={ () => {
                         this.props.history.push(
                           '/my/edit-space');
-                      }}>
+                      } }>
                 Создать площадку
               </Button>
             </React.Fragment>
@@ -56,17 +59,17 @@ export class MySpaces extends React.PureComponent {
         <FixedLayout vertical="bottom">
           <Tabs>
             <TabsItem
-              onClick={() => {
-                this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.SUBSCRIPTIONS })
-              }}
-              selected={this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.SUBSCRIPTIONS}>
+              onClick={ () => {
+                this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.LIST_VIEW });
+              } }
+              selected={ this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.LIST_VIEW }>
               Подписки
             </TabsItem>
             <TabsItem
-              onClick={() => {
-                this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.MY_SPACES })
-              }}
-              selected={this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MY_SPACES}>
+              onClick={ () => {
+                this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.MAP_VIEW });
+              } }
+              selected={ this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW }>
               Созданные мной
             </TabsItem>
           </Tabs>
@@ -74,5 +77,12 @@ export class MySpaces extends React.PureComponent {
       </React.Fragment>
     );
   };
+}
 
+function mapStateToProps (state) {
+  return state.mySpaces;
+}
+
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({ getMySpaces }, dispatch);
 }

@@ -3,7 +3,7 @@ import {
   Cell,
   Avatar,
 } from '@vkontakte/vkui';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 type SpaceData = {
   id: string,
@@ -17,7 +17,7 @@ type SpaceListItemProps = {
 @withRouter
 export class SpaceListItem extends React.PureComponent<SpaceListItemProps> {
   go = () => {
-    this.props.history.push(`/${this.props.location.pathname.split('/')[1]}/space-details?id=${ this.props.space.id }`);
+    this.props.history.push(`/${this.props.location.pathname.split('/')[1]}/space-details?id=${ this.props.space.uuid }`);
   };
 
   render () {

@@ -1,7 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Div, FixedLayout, PanelHeader, Search, Tabs, TabsItem } from '@vkontakte/vkui';
 import { SpacesList } from '../../spaces/spaces-list/SpacesList';
+import { getSpaces } from '../../../store/actions/spaceActions';
 import { MapView } from '../../common/MapView';
 
 const SPACES_VIEW_TYPES = {
@@ -10,6 +13,7 @@ const SPACES_VIEW_TYPES = {
 };
 
 @withRouter
+@connect(mapStateToProps, mapDispatchToProps)
 export class AllSpaces extends React.PureComponent {
 
   state = {
@@ -17,6 +21,7 @@ export class AllSpaces extends React.PureComponent {
   };
 
   componentDidMount () {
+    this.props.getSpaces();
   }
 
   render () {
@@ -36,7 +41,7 @@ export class AllSpaces extends React.PureComponent {
         {
           (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.LIST_VIEW) &&
           <div style={ { padding: '48px 0 96px'} }>
-            <SpacesList>
+            <SpacesList spaces={ this.props.spaces }>
             </SpacesList>
           </div>
         }
@@ -54,17 +59,17 @@ export class AllSpaces extends React.PureComponent {
         <FixedLayout vertical="bottom">
           <Tabs>
             <TabsItem
-              onClick={() => {
-                this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.LIST_VIEW })
-              }}
-              selected={this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.LIST_VIEW}>
+              onClick={ () => {
+                this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.LIST_VIEW });
+              } }
+              selected={ this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.LIST_VIEW }>
               Списком
             </TabsItem>
             <TabsItem
-              onClick={() => {
-                this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.MAP_VIEW })
-              }}
-              selected={this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW}>
+              onClick={ () => {
+                this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.MAP_VIEW });
+              } }
+              selected={ this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW }>
               На карте
             </TabsItem>
           </Tabs>
@@ -73,4 +78,13 @@ export class AllSpaces extends React.PureComponent {
     );
   };
 
+}
+
+function mapStateToProps (state) {
+  return state.spaces;
+}
+
+
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({ getSpaces }, dispatch);
 }
