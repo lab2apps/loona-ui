@@ -21,7 +21,7 @@ export class AllSpaces extends React.PureComponent {
 
   render () {
     return (
-      <div style={{height: '100%'}}>
+      <React.Fragment>
         <PanelHeader>
           Все площадки
         </PanelHeader>
@@ -30,23 +30,24 @@ export class AllSpaces extends React.PureComponent {
           <Search/>
         </FixedLayout>
 
-        <Div style={ {padding: '48px 0', height: '100%'} }>
-          {
-            (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.LIST_VIEW) &&
-              <React.Fragment>
-                <SpacesList>
-                </SpacesList>
-              </React.Fragment>
-          }
 
-          {
-            (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW) &&
-              <React.Fragment>
-                <MapView>
-                </MapView>
-              </React.Fragment>
-          }
-        </Div>
+        {
+          (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.LIST_VIEW) &&
+          <div style={ { padding: '48px 0 96px'} }>
+            <SpacesList>
+            </SpacesList>
+          </div>
+        }
+
+        {
+          (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW) &&
+          <React.Fragment>
+            <div style={ { height: '100%', padding: '48px 0 96px'} }>
+              <MapView>
+              </MapView>
+            </div>
+          </React.Fragment>
+        }
 
         <FixedLayout vertical="bottom">
           <Tabs>
@@ -66,7 +67,7 @@ export class AllSpaces extends React.PureComponent {
             </TabsItem>
           </Tabs>
         </FixedLayout>
-      </div>
+      </React.Fragment>
     );
   };
 

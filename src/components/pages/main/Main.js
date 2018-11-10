@@ -94,7 +94,7 @@ export class Main extends React.PureComponent {
 
         <View id='/my'
               activePanel={ this.state.activePanel }>
-          <Panel id='/my'>
+          <Panel id='/my' className="l-panel--full-height">
             <MySpaces/>
           </Panel>
 

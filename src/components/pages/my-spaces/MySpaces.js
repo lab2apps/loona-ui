@@ -28,8 +28,7 @@ export class MySpaces extends React.PureComponent {
           Мои площадки
         </PanelHeader>
 
-        <Div style={{ padding: '0 0 60px' }}>
-
+        <div style={ { padding: '0 0 96px'} }>
           {
             (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.SUBSCRIPTIONS) &&
             <React.Fragment>
@@ -52,7 +51,7 @@ export class MySpaces extends React.PureComponent {
               </Button>
             </React.Fragment>
           }
-        </Div>
+        </div>
 
         <FixedLayout vertical="bottom">
           <Tabs>
