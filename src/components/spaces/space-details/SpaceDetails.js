@@ -21,6 +21,7 @@ import Icon24Add from '@vkontakte/icons/dist/24/add';
 import { getRooms } from '../../../store/actions/roomActions';
 import { environment } from '../../../config/environment';
 import { WEEKDAYS } from '../../../contants/WEEKDAYS';
+import { SPACE_TYPES } from '../../../contants/SPACE_TYPES';
 
 const SPACE_DETAILS_TABS = {
   ALL_ROOMS: 'ALL_ROOMS',
@@ -94,7 +95,7 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
           <List>
             <Cell
               size="l"
-              description={ this.props.space.type }
+              description={ SPACE_TYPES[this.props.space.type] }
               bottomContent={
 
                 // FOR OWNER ONLY
