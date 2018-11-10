@@ -105,6 +105,10 @@ export class RoomBooking extends React.PureComponent<RoomDetailsProps> {
     });
   };
 
+  confirmBooking = () => {
+
+  };
+
   render () {
     const { focusedInput, startDate, endDate } = this.state;
 
@@ -182,8 +186,8 @@ export class RoomBooking extends React.PureComponent<RoomDetailsProps> {
         <Group>
           <Div>
             <div hidden>
-              <input type="text" name="start date" value={startDateString} readOnly/>
-              <input type="text" name="end date" value={endDateString} readOnly/>
+              <input type="text" name="startRentTime" value={startDateString} readOnly/>
+              <input type="text" name="endRentTime" value={endDateString} readOnly/>
             </div>
 
             <div className="l-centralizer l-border-box">
@@ -202,7 +206,8 @@ export class RoomBooking extends React.PureComponent<RoomDetailsProps> {
           </Div>
 
           <Div>
-            <Button size="xl" level="primary" disabled={!this.state.endDate || !this.state.startDate}>Подтвердить бронь</Button>
+            <Button size="xl" level="primary" disabled={!this.state.endDate || !this.state.startDate}
+                    onClick={this.confirmBoooking}>Подтвердить бронь</Button>
           </Div>
         </Group>
       </React.Fragment>
