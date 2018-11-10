@@ -12,22 +12,31 @@ export class SpaceApiService {
       });
   }
 
+  static getMy ({ filter } = {}) {
+    return axios.get(`${environment.apiUrl}/api/spaces/my`, {
+      params: filter,
+    })
+      .then((response) => {
+        return response.data;
+      });
+  }
+
   static get (id) {
-    return axios.get(`${environment.apiUrl}/api/spaces/${id}`)
+    return axios.get(`${environment.apiUrl}/api/space/${id}`)
       .then(response => {
         return response.data;
       });
   }
 
   static create (data) {
-    return axios.post(`${environment.apiUrl}/api/spaces`, data)
+    return axios.post(`${environment.apiUrl}/api/space`, data)
       .then(response => {
         return response.data;
       });
   }
 
   static update (id, data) {
-    return axios.put(`${environment.apiUrl}/api/spaces/${id}`, data)
+    return axios.put(`${environment.apiUrl}/api/space/${id}`, data)
       .then(response => {
         return response.data;
       });
@@ -35,7 +44,7 @@ export class SpaceApiService {
 
 
   static remove (id) {
-    return axios.delete(`${environment.apiUrl}/api/spaces/${id}`)
+    return axios.delete(`${environment.apiUrl}/api/space/${id}`)
       .then(response => {
         return response.data;
       });

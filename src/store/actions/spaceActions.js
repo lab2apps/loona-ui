@@ -3,10 +3,36 @@ import { actionType } from '../../utils/actionType';
 import { SpaceApiService } from '../../services/SpaceApiService';
 
 export const SpaceActionType: ActionType       = actionType('space');
+export const SpaceMyActionType: ActionType       = actionType('space-my');
 export const SpaceGetActionType: ActionType    = actionType('space-get');
 export const SpaceCreateActionType: ActionType = actionType('space-create');
 export const SpaceUpdateActionType: ActionType = actionType('space-update');
 export const SpaceDeleteActionType: ActionType = actionType('space-delete');
+
+export const getMySpaces = (filter) => {
+  return (dispatch) => {
+    dispatch({
+      type: SpaceMyActionType.FETCHING,
+    });
+
+    return SpaceApiService.getMy({ filter })
+      .then(data => {
+        dispatch({
+          type: SpaceMyActionType.SUCCESS,
+          payload: {
+            data,
+          }
+        });
+      })
+      .catch((e) => {
+        dispatch({
+          type: SpaceMyActionType.FAILURE,
+        });
+
+        throw e;
+      });
+  };
+};
 
 export const getSpaces = (filter) => {
   return (dispatch) => {

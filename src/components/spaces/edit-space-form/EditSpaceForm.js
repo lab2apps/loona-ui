@@ -12,54 +12,75 @@ import {
 } from '@vkontakte/vkui';
 
 import Icon24Camera from '@vkontakte/icons/dist/24/camera';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { createSpace } from '../../../store/actions/spaceActions';
+import { serialize } from '../../../utils/serialize';
 
 type EditSpaceFormProps = {
-  spaceId: number,
+  spaceId?: number,
 }
 
+@connect(null, mapDispatchToProps)
 export class EditSpaceForm extends React.PureComponent<EditSpaceFormProps> {
+  onSubmit = (event) => {
+    event.preventDefault();
+
+    this.props.createSpace(serialize(event.target));
+  };
+
   render () {
     return (
-      <FormLayout className="l-bg-white">
+      <FormLayout className="l-bg-white" onSubmit={ this.onSubmit } name={ 'test' }>
 
         <Input type="text"
                top="Название площадки"
+               name={ 'name' }
                placeholder="Введите название площадки"/>
 
-        <Select top="Тип площадки" placeholder="Выберите тип площадки">
-          <option value="a">А</option>
-          <option value="b">Б</option>
+        <Select top="Тип площадки" placeholder="Выберите тип площадки"
+                name='type'>
+          <option value="0">Пространство</option>
+          <option value="1">Коворкинг</option>
+          <option value="2">Бизнес-центр</option>
         </Select>
 
-        <File top="Добавить фото" before={<Icon24Camera/>} size="l">
+        <File top="Добавить фото" before={ <Icon24Camera/> } size="l">
           Открыть галерею
         </File>
 
-        <Textarea top="Описание площадки"/>
+        <Input type='text'
+               style={ { display: 'none' } }
+               name='imageUrls'
+               value={ 'https://www.google.ru/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png,https://www.google.ru/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png' }/>
+
+        <Textarea top="Описание площадки" name={ 'description' }/>
 
         <Input type="text"
                top="Адрес площадки"
+               name='address'
                placeholder="Введите адрес площадки"/>
 
         <Input type="text"
+               name={ 'phone' }
                top="Телефон для связи"
                placeholder="Введите телефон"/>
 
         <FormLayoutGroup top="Дни работы площадки">
-          <Checkbox>Понедельник</Checkbox>
-          <Checkbox>Вторник</Checkbox>
-          <Checkbox>Среда</Checkbox>
-          <Checkbox>Четверг</Checkbox>
-          <Checkbox>Пятница</Checkbox>
-          <Checkbox>Суббота</Checkbox>
-          <Checkbox>Воскресенье</Checkbox>
+          <Checkbox name={ 'workDays' } value={ 1 } defaultChecked={ true }>Понедельник</Checkbox>
+          <Checkbox name={ 'workDays' } value={ 2 } defaultChecked={ true }>Вторник</Checkbox>
+          <Checkbox name={ 'workDays' } value={ 3 } defaultChecked={ true }>Среда</Checkbox>
+          <Checkbox name={ 'workDays' } value={ 4 } defaultChecked={ true }>Четверг</Checkbox>
+          <Checkbox name={ 'workDays' } value={ 5 } defaultChecked={ true }>Пятница</Checkbox>
+          <Checkbox name={ 'workDays' } value={ 6 }>Суббота</Checkbox>
+          <Checkbox name={ 'workDays' } value={ 7 }>Воскресенье</Checkbox>
         </FormLayoutGroup>
 
         <FormLayoutGroup
           top="Дни работы площадки"
           className="l-time-range">
-          <Input className='l-time-range__input' type="time" defaultValue="09:00"/>
-          <Input className='l-time-range__input' type="time" defaultValue="20:00"/>
+          <Input className='l-time-range__input' type="time" defaultValue="09:00" name='startWorkTime'/>
+          <Input className='l-time-range__input' type="time" defaultValue="20:00" name={ 'endWorkTime' }/>
         </FormLayoutGroup>
 
         <Div className='l-text-gray'>
@@ -74,4 +95,10 @@ export class EditSpaceForm extends React.PureComponent<EditSpaceFormProps> {
       </FormLayout>
     );
   }
+}
+
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({
+    createSpace,
+  }, dispatch);
 }

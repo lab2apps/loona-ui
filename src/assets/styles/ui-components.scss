@@ -8,14 +8,18 @@
     position: relative;
 
     &:last-child {
-      padding-left: 8px;
+      padding-left: 20px;
+
+      .Input-underline {
+        width: calc(100% - 20px);
+        margin-left: 20px;
+      }
 
       &:before {
         content: "—";
         position: absolute;
         right: 100%;
         top: calc(50% - 1px);
-        padding-left: 10px !important;
         line-height: 1px;
         color: var(--text_secondary);
       }

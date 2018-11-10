@@ -32,7 +32,7 @@ class SplashScreenRoute extends React.Component<SplashScreenRouteProps> {
     const Component = this.props.component;
     const props     = this.props.props;
 
-    if (this.state.delay) {
+    if (!this.props.token || this.state.delay) {
       return <SplashScreen/>;
     }
 
@@ -44,10 +44,11 @@ class SplashScreenRoute extends React.Component<SplashScreenRouteProps> {
   }
 }
 
-export const AppRoute = connect(mapStateToProps)(({ component: Component, settings, user, ...restProps }) => {
+export const AppRoute = connect(mapStateToProps)(({ component: Component, settings, user, auth, ...restProps }) => {
   return (<Route { ...restProps }
                  render={ (props) => {
                    return <SplashScreenRoute userId={ user.id }
+                                             token={ auth.token }
                                              props={ props }
                                              location={ props.location }
                                              showOnBoarding={ settings.showOnBoarding }
@@ -60,6 +61,7 @@ AppRoute.propTypes = Route.propTypes;
 function mapStateToProps (state: RootState) {
   return {
     user: state.user,
+    auth: state.auth,
     settings: state.settings,
   };
 }
