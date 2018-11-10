@@ -27,7 +27,7 @@ type EditSpaceFormProps = {
 @connect(null, mapDispatchToProps)
 export class EditSpaceForm extends React.PureComponent<EditSpaceFormProps> {
   static defaultProps = {
-    space: [],
+    space: null,
   };
 
   onSubmit = (event) => {
@@ -58,12 +58,12 @@ export class EditSpaceForm extends React.PureComponent<EditSpaceFormProps> {
         <Input type="text"
                top="Название площадки"
                name={ 'name' }
-               defaultValue={ this.props.space.name }
+               defaultValue={ this.props.space && this.props.space.name }
                placeholder="Введите название площадки"/>
 
         <Select top="Тип площадки"
                 placeholder="Выберите тип площадки"
-                defaultValue={ this.props.space.type }
+                defaultValue={ this.props.space && this.props.space.type }
                 name='type'>
           <option value="0">Пространство</option>
           <option value="1">Коворкинг</option>
@@ -71,22 +71,22 @@ export class EditSpaceForm extends React.PureComponent<EditSpaceFormProps> {
         </Select>
 
         <ImageUploader name={ 'imageUrls' }
-                       uploadedFiles={ this.props.space.imageUrls }
+                       uploadedFiles={ this.props.space && this.props.space.imageUrls }
                        label={ 'Открыть галерею' }
                        top={ 'Добавить фото' }/>
 
         <Textarea top="Описание площадки" name={ 'description' }
-                  defaultValue={ this.props.space.description }/>
+                  defaultValue={ this.props.space && this.props.space.description }/>
 
         <Input type="text"
                top="Адрес площадки"
                name='address'
-               defaultValue={ this.props.space.address }
+               defaultValue={ this.props.space && this.props.space.address }
                placeholder="Введите адрес площадки"/>
 
         <Input type="text"
                name={ 'phone' }
-               defaultValue={ this.props.space.phone }
+               defaultValue={ this.props.space && this.props.space.phone }
                top="Телефон для связи"
                placeholder="Введите телефон"/>
 
@@ -124,9 +124,11 @@ export class EditSpaceForm extends React.PureComponent<EditSpaceFormProps> {
         <FormLayoutGroup
           top="Дни работы площадки"
           className="l-time-range">
-          <Input className='l-time-range__input' type="time" defaultValue={ this.props.space.startWorkTime || '09:00' }
+          <Input className='l-time-range__input' type="time"
+                 defaultValue={ this.props.space && this.props.space.startWorkTime || '09:00' }
                  name='startWorkTime'/>
-          <Input className='l-time-range__input' type="time" defaultValue={ this.props.space.endWorkTime || '20:00' }
+          <Input className='l-time-range__input' type="time"
+                 defaultValue={ this.props.space && this.props.space.endWorkTime || '20:00' }
                  name={ 'endWorkTime' }/>
         </FormLayoutGroup>
 

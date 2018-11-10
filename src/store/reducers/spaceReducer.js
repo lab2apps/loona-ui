@@ -6,7 +6,7 @@ export type SpaceState = {
 
 const initialState: SpaceState = {
   fetching: true,
-  space: {},
+  space: null,
 };
 
 export const spaceReducer = (state = initialState, action) => {
