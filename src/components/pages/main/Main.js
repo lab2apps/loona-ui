@@ -46,9 +46,11 @@ export class Main extends React.PureComponent {
   };
 
   render () {
+    const hasTabbar = !['/my/edit-space'].includes(this.state.activePanel);
+
     return (
       <Epic activeStory={ this.state.activeStory }
-            tabbar={ <Tabbar>
+            tabbar={ hasTabbar ? <Tabbar>
               <TabbarItem onClick={ this.goToPanel('/all') }
                           selected={ this.state.activeStory === '/all' }>
                 Все Площадки
@@ -59,7 +61,7 @@ export class Main extends React.PureComponent {
                 Мои Площадки
               </TabbarItem>
             </Tabbar>
-            }>
+            : null}>
 
         <View id='/all'
               activePanel={ this.state.activePanel }>
@@ -90,7 +92,11 @@ export class Main extends React.PureComponent {
             <Room/>
           </Panel>
 
-          <Panel id='/my/edit-room'>
+          <Panel id='/my/edit-space' className='l-panel l-panel--no-tabbar'>
+            <EditSpace/>
+          </Panel>
+
+          <Panel id='/my/edit-room' className='l-panel l-panel--no-tabbar'>
             <EditRoom/>
           </Panel>
         </View>
