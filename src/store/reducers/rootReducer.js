@@ -21,6 +21,9 @@ import { spaceReducer } from './spaceReducer';
 import { roomsReducer } from './roomsReducer';
 import type { RoomsState } from './roomsReducer';
 
+import type { RoomState } from './roomReducer';
+import { roomReducer } from './roomReducer';
+
 export type RootState = {
   user: UserState,
   settings: SettingState,
@@ -29,6 +32,7 @@ export type RootState = {
   mySpaces: MySpacesState,
   space: SpaceState,
   rooms: RoomsState,
+  room: RoomState,
 };
 
 export const rootReducer = (state, action) => {
@@ -40,5 +44,6 @@ export const rootReducer = (state, action) => {
     mySpaces: mySpacesReducer,
     space: spaceReducer,
     rooms: roomsReducer,
+    room: roomReducer,
   })(state, action);
 };

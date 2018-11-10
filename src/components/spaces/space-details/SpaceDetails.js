@@ -181,7 +181,7 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
 
                 <Cell>
                   <InfoRow title="Дни работы площадки">
-                    { this.props.space.workDays.length === 7 ? 'Eжедневно' : this.props.space.workDays.map(item => WEEKDAYS[item]).join(',') }
+                    { this.props.space.workDays.length === 7 ? 'Eжедневно' : this.props.space.workDays.map(item => WEEKDAYS[item]).join(', ') }
                   </InfoRow>
                 </Cell>
 

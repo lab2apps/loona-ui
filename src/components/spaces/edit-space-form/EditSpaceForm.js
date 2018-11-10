@@ -7,7 +7,6 @@ import {
   Input, Link,
   Select,
   Textarea,
-  CellButton,
   Div,
 } from '@vkontakte/vkui';
 
