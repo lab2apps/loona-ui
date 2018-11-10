@@ -1,5 +1,7 @@
 import React from 'react';
 import {
+  Avatar,
+  Cell,
   Div,
 } from '@vkontakte/vkui';
 import { Link, withRouter } from 'react-router-dom';
@@ -15,11 +17,17 @@ type RoomListItemProps = {
 
 @withRouter
 export class RoomListItem extends React.PureComponent<RoomListItemProps> {
+  go = () => {
+    this.props.history.push(`/${this.props.location.pathname.split('/')[1]}/room-details?id=${ this.props.room.id }`);
+  };
+
   render () {
     return (
-      <Div>
-        <Link to={ `/${this.props.location.pathname.split('/')[1]}/room-details?id=${ this.props.room.id }` }>Room list item</Link>
-      </Div>
+      <Cell before={ <Avatar type={'app'} size={50}/> }
+            onClick={ this.go }
+            description={ this.props.room.type }>
+        { this.props.room.name }
+      </Cell>
     );
   }
 }

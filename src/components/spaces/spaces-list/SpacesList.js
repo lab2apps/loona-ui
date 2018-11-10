@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  Div,
-  Panel,
-  PanelHeader,
-  FixedLayout,
-  Tabs,
-  TabsItem,
-  Search,
-} from '@vkontakte/vkui';
+import { List } from '@vkontakte/vkui';
 
 import { SpaceListItem } from '../space-list-item/SpaceListItem';
 
@@ -16,7 +8,7 @@ type SpacesListProps = {}
 export class SpacesList extends React.PureComponent<SpacesListProps> {
 
   items = [
-    { id: 1, name: 'item #1' },
+    { id: 1, name: 'item #1', type: 'Room' },
     { id: 2, name: 'item #2' },
     { id: 3, name: 'item #3' },
     { id: 4, name: 'item #4' },
@@ -50,9 +42,11 @@ export class SpacesList extends React.PureComponent<SpacesListProps> {
 
   render () {
     return (
-      this.items.map((item, i) => {
-        return <SpaceListItem key={i} space={item}/>;
-      })
+      <List>
+        { this.items.map((item, i) => {
+          return <SpaceListItem key={ i } space={ item }/>;
+        }) }
+      </List>
     );
   }
 }
