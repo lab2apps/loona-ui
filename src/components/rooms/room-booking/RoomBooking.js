@@ -12,6 +12,7 @@ import { START_DATE, END_DATE } from 'react-dates/src/constants';
 
 import Icon24About from '@vkontakte/icons/dist/24/about';
 import Icon24Flash from '@vkontakte/icons/dist/24/flash';
+import Icon24Recent from '@vkontakte/icons/dist/24/recent';
 
 type RoomInfo = {}
 
@@ -84,6 +85,18 @@ export class RoomBooking extends React.PureComponent<RoomDetailsProps> {
                 </div>
               </div>
             </Cell>
+
+            <Cell multiline>
+              <div className='l-notification'>
+                <div className="l-notification__icon" style={ { color: 'var(--steel_gray_500)' } }>
+                  <Icon24Recent/>
+                </div>
+                <div className="l-notification__content l-text-gray">
+                  Место бронируется c подтверждением
+                </div>
+              </div>
+            </Cell>
+
             <Cell>
               <div className="l-flex">
                 <InfoRow className="l-flex__item" title="Количество часов">

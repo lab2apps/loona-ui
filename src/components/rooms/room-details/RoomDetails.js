@@ -38,16 +38,20 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
     this.props.history.push(`/my/edit-room?id=${ this.props.room.uuid }`);
   };
 
+  onBookRoomButtonClick = () => {
+    this.props.history.push(`/my/book-room?id=${ this.props.room.uuid }`);
+  };
+
+  onBookRoomReviewButtonClick = () => {
+    this.props.history.push(`/my/book-room?id=${ this.props.room.uuid }`);
+  };
+
   onFocusChange = (focusedInput) => {
     console.warn('onFocusChange', focusedInput);
     this.setState({
       // Force the focusedInput to always be truthy so that dates are always selectable
       focusedInput: !focusedInput ? START_DATE : focusedInput,
     });
-  };
-
-  bookView = () => {
-
   };
 
   render () {
@@ -75,16 +79,20 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
               bottomContent={
                 <div style={ { display: 'flex', paddingTop: '10px' } }>
                   <Button size="l" stretched style={ { marginRight: 8 } }
-                          onClick={ this.onMessageButtonClick }>Бронировать</Button>
+                          onClick={ this.onBookRoomButtonClick }>Бронировать
+                  </Button>
 
 
                   { this.props.room.mySpace && (
                     <Button size="l" stretched level="secondary"
-                            onClick={ this.onEditButtonClick }>Редактировать</Button>
+                            onClick={ this.onEditButtonClick }>Редактировать
+                    </Button>
                   ) }
 
                   { !this.props.room.mySpace && (
-                    <Button size="l" stretched level="secondary" onClick={ this.bookView }>На просмотр</Button>
+                    <Button size="l" stretched level="secondary"
+                            onClick={ this.onBookRoomReviewButtonClick }>На просмотр
+                    </Button>
                   ) }
                 </div>
 
@@ -170,7 +178,12 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
           </Div>
 
           <Div>
-            <Button size="xl" level="primary">Бронировать</Button>
+            <Button
+              size="xl"
+              level="primary"
+              onClick={ this.onBookRoomButtonClick }>
+              Бронировать
+            </Button>
           </Div>
         </Group>
       </React.Fragment>
