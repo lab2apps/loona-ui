@@ -75,10 +75,12 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
   };
 
   onBookRoomButtonClick = () => {
+    // TODO add params to indicate that we booking room review, not room
     this.props.history.push(`/my/book-room?id=${ this.props.room.uuid }`);
   };
 
   onBookRoomReviewButtonClick = () => {
+    // TODO add params to indicate that we booking room, not room review
     this.props.history.push(`/my/book-room?id=${ this.props.room.uuid }`);
   };
 

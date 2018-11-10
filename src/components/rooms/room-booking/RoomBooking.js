@@ -77,7 +77,7 @@ export class RoomBooking extends React.PureComponent<RoomDetailsProps> {
 
             <Cell multiline>
               <div className='l-notification'>
-                <div className="l-notification__icon" style={ { color: 'var(--steel_gray_500)' } }>
+                <div className="l-notification__icon" style={ { color: 'var(--green)' } }>
                   <Icon24Flash/>
                 </div>
                 <div className="l-notification__content l-text-gray">
@@ -88,7 +88,7 @@ export class RoomBooking extends React.PureComponent<RoomDetailsProps> {
 
             <Cell multiline>
               <div className='l-notification'>
-                <div className="l-notification__icon" style={ { color: 'var(--steel_gray_500)' } }>
+                <div className="l-notification__icon" style={ { color: 'var(--yellow)' } }>
                   <Icon24Recent/>
                 </div>
                 <div className="l-notification__content l-text-gray">
