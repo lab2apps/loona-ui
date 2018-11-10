@@ -8,6 +8,7 @@ import {
   Checkbox,
   Button,
   Tabs,
+  Div,
   TabsItem,
 } from '@vkontakte/vkui/';
 
@@ -106,6 +107,7 @@ export class EditRoomForm extends React.PureComponent<EditRoomFormProps> {
           </Select>
         </FormLayoutGroup>
 
+        <Div>
         <Tabs type="buttons" className="l-tabs-primary">
           <TabsItem
             onClick={ () => this.setState({ bookType: BOOK_TYPES.WITH_CONFIRMATION }) }
@@ -124,6 +126,7 @@ export class EditRoomForm extends React.PureComponent<EditRoomFormProps> {
             <Input type='text' value={ this.state.bookType } name={ 'bookType' }/>
           </div>
         </Tabs>
+        </Div>
 
 
         <FormLayoutGroup top="Дни работы площадки">

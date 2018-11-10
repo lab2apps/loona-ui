@@ -31,11 +31,11 @@ export class MySpaces extends React.PureComponent {
           Мои площадки
         </PanelHeader>
 
-        <div style={ { padding: '0 0 96px'} }>
+        <div style={ { padding: '0 0 96px' } }>
           {
             (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.SUBSCRIPTIONS) &&
             <React.Fragment>
-              <SpacesList spaces={ this.props.spaces }>
+              <SpacesList spaces={ this.props.spaces.filter(space => !space.mySpace) }>
               </SpacesList>
             </React.Fragment>
           }
@@ -43,7 +43,7 @@ export class MySpaces extends React.PureComponent {
           {
             (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MY_SPACES) &&
             <React.Fragment>
-              <SpacesList spaces={ this.props.spaces }>
+              <SpacesList spaces={ this.props.spaces.filter(space => space.mySpace) }>
               </SpacesList>
               <Button size='xl'
                       onClick={ () => {

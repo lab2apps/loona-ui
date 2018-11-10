@@ -50,7 +50,7 @@ export class Main extends React.PureComponent {
   };
 
   render () {
-    const hasTabbar = !['/my/edit-space'].includes(this.state.activePanel);
+    const hasTabbar = !['/my/edit-space', '/my/edit-room'].includes(this.state.activePanel);
 
     return (
       <Epic activeStory={ this.state.activeStory }
