@@ -7,6 +7,7 @@ import debounce from 'lodash/debounce';
 import { SpacesList } from '../../spaces/spaces-list/SpacesList';
 import { getSpaces, querySpaces } from '../../../store/actions/spaceActions';
 import { MapView } from '../../common/MapView';
+import Icon24Filter from '@vkontakte/icons/dist/24/filter';
 
 const SPACES_VIEW_TYPES = {
   LIST_VIEW: 'LIST',
@@ -25,16 +26,16 @@ export class AllSpaces extends React.PureComponent {
     this.props.getSpaces();
   }
 
-  onQueryChange =  (queryString) => {
+  onQueryChange = (queryString) => {
     this.props.querySpaces({
-      queryString
+      queryString,
     });
   };
 
   mapSpaceToPoint (space) {
     return {
       name: space.name,
-      coords: [space.latitude,space.longitude],
+      coords: [space.latitude, space.longitude],
       id: space.uuid,
     }
   }
@@ -47,11 +48,14 @@ export class AllSpaces extends React.PureComponent {
         </PanelHeader>
 
         <FixedLayout vertical="top">
-          <Search
-            onChange={debounce(this.onQueryChange,300)}
-            className={
-              (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW) ? 'l-search--bg-transparent' : ''
-            }/>
+          <React.Fragment>
+            <Search
+              onChange={debounce(this.onQueryChange, 300)}
+              className={
+                (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW) ? 'l-search--bg-transparent' : ''
+              }/>
+            <Icon24Filter className={'l-filter-search'} onClick={this.props.showFilters}/>
+          </React.Fragment>
         </FixedLayout>
 
 
@@ -67,7 +71,7 @@ export class AllSpaces extends React.PureComponent {
           (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW) &&
           <React.Fragment>
             <div style={{ height: '100%', padding: '0 0 96px' }}>
-              <MapView points={ this.props.spaces.map(this.mapSpaceToPoint) }/>
+              <MapView points={this.props.spaces.map(this.mapSpaceToPoint)}/>
             </div>
           </React.Fragment>
         }

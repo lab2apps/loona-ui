@@ -10,3 +10,73 @@
 img {
   object-fit: cover;
 }
+
+.l-filter {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: transparent;
+  transition: background-color 300ms ease-in-out;
+
+  &__bg {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+  }
+
+
+  &__inner {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    min-height: 300px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    bottom: 0;
+    transform: translateY(100%);
+    transition: transform 100ms 300ms ease-in-out;
+  }
+
+  &__range {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &--active {
+    background-color: rgba(0,0,0,0.4);
+  }
+
+  &--active &__inner {
+    transform: translateY(0%);
+  }
+}
+
+
+.l-filter-search {
+  position: absolute;
+  top: 3px;
+  right: 14px;
+  color: rgba(74, 89, 104, 0.7);
+  transition: right 100ms linear;
+  padding: 10px;
+}
+
+.View--android {
+  .l-filter-search {
+    top: 7px;
+    color: rgba(255,255,255,0.45)
+  }
+}
+
+.Search--has-after.Search--focused + .l-filter-search {
+  right: 115px;
+}
