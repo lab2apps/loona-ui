@@ -1,13 +1,21 @@
 import React from 'react';
 import {
+  IOS,
   PanelHeader,
+  platform,
+  HeaderButton
 } from '@vkontakte/vkui';
-import { SpaceDetails } from '../../spaces/space-details/SpaceDetails';
-import { getSpace } from '../../../store/actions/spaceActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import querystring from 'query-string';
 import { withRouter } from 'react-router-dom';
+import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
+import Icon24Back from '@vkontakte/icons/dist/24/back';
+
+import { SpaceDetails } from '../../spaces/space-details/SpaceDetails';
+import { getSpace } from '../../../store/actions/spaceActions';
+
+const osname = platform();
 
 type SpaceDetailsProps = {}
 
