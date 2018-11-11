@@ -59,11 +59,13 @@ export const getSpaces = (filter) => {
   };
 };
 
-export const getSpace = (id) => {
+export const getSpace = (id, fetching) => {
   return (dispatch) => {
-    dispatch({
-      type: SpaceGetActionType.FETCHING,
-    });
+    if (fetching) {
+      dispatch({
+        type: SpaceGetActionType.FETCHING,
+      });
+    }
 
     return SpaceApiService.get(id)
       .then(data => {
