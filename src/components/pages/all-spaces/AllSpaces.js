@@ -34,7 +34,8 @@ export class AllSpaces extends React.PureComponent {
   mapSpaceToPoint (space) {
     return {
       name: space.name,
-      coords: [space.latitude,space.longitude]
+      coords: [space.latitude,space.longitude],
+      id: space.uuid,
     }
   }
 

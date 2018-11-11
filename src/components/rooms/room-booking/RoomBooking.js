@@ -172,7 +172,7 @@ export class RoomBooking extends React.PureComponent<RoomDetailsProps> {
                     <Icon24Flash/>
                   </div>
                   <div className="l-notification__content l-text-gray">
-                    Место бронируется без подтверждения
+                    Место бронируется без подтверждения арендодателя
                   </div>
                 </div>
               </Cell>
