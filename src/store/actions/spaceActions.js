@@ -100,6 +100,8 @@ export const createSpace = (data) => {
             data,
           },
         });
+
+        return data;
       })
       .catch((e) => {
         dispatch({

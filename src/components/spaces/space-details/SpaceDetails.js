@@ -6,6 +6,7 @@ import {
   List,
   Cell,
   Tabs,
+  Div,
   TabsItem,
   InfoRow,
   Gallery,
@@ -62,7 +63,7 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
 
   addToFavorites = () => {
     let promise;
-    if (this.props.space.myLike)  {
+    if (this.props.space.myLike) {
       promise = axios.delete(`${environment.apiUrl}/api/space/${this.props.space.uuid}/favorite`);
     } else {
       promise = axios.post(`${environment.apiUrl}/api/space/${this.props.space.uuid}/favorite`);
@@ -126,18 +127,18 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
 
                   {this.props.space.mySpace ? (<Button size="l" stretched level="secondary"
                                                        onClick={this.onEditButtonClick}>Редактировать</Button>) : (
-                   <React.Fragment>
-                     {this.props.space.myLike && (
-                       <Button size="l" stretched level="secondary"
-                               onClick={this.addToFavorites}>Отписаться</Button>
-                     ) }
+                    <React.Fragment>
+                      {this.props.space.myLike && (
+                        <Button size="l" stretched level="secondary"
+                                onClick={this.addToFavorites}>Отписаться</Button>
+                      )}
 
-                     {!this.props.space.myLike && (
-                       <Button size="l" stretched level="commerce"
-                                   onClick={this.addToFavorites}>В избранное</Button>
-                     ) }
+                      {!this.props.space.myLike && (
+                        <Button size="l" stretched level="commerce"
+                                onClick={this.addToFavorites}>В избранное</Button>
+                      )}
 
-                   </React.Fragment>
+                    </React.Fragment>
                   )}
 
                 </div>
@@ -179,6 +180,18 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
               (this.state.selectedTab === SPACE_DETAILS_TABS.ALL_ROOMS) &&
 
               <React.Fragment>
+                {this.props.rooms.rooms && this.props.rooms.rooms.length === 0 && (
+                  <Cell multiline={true}
+                        style={{ textAlign: 'center' }}>
+                    На этой площадке пока пусто :(
+
+
+                    {this.props.space.mySpace &&
+                    <React.Fragment><br/>Пришло время добавить места, которые смогут арендовать ваши
+                      посетители</React.Fragment>}
+                  </Cell>
+                )}
+
                 {this.props.rooms.rooms && <RoomsList rooms={this.props.rooms.rooms}/>}
 
                 {this.props.space.mySpace && (
