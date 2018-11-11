@@ -35,8 +35,6 @@ export class SpaceListItem extends React.PureComponent<SpaceListItemProps> {
         <div className={'l-flex'}>
           <div className='l-flex__item' style={{flexShrink: 1, overflow: 'hidden', textOverflow: 'ellipsis', alignItems: 'center'}}>
           {this.props.space.name}
-          {this.props.space.name}
-          {this.props.space.name}
           </div>
 
           <div className='l-flex__item' style={{flexGrow: 0}}>
