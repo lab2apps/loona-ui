@@ -27,13 +27,21 @@ export class Space extends React.PureComponent<SpaceDetailsProps> {
   render () {
     return (
       <React.Fragment>
-        <PanelHeader>
+        <PanelHeader
+          addon={<HeaderButton onClick={this.props.history.goBack}>Назад</HeaderButton>}
+          left={
+            <HeaderButton onClick={this.props.history.goBack}>{
+              osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/>}
+            </HeaderButton>
+          }>
           Детали площадки
         </PanelHeader>
 
         {!this.props.fetching &&
         <SpaceDetails space={this.props.space}
-                      onLike={() => {this.getSpace(false)}}>
+                      onLike={() => {
+                        this.getSpace(false)
+                      }}>
         </SpaceDetails>
         }
 
