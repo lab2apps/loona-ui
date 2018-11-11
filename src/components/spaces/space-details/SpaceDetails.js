@@ -75,7 +75,7 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
   };
 
   sendMessage = () => {
-    window.location.replace('https://vk.com/im?sel=' + this.props.space.userId)
+    window.location.href = 'vk://vk.com/im?sel=' + this.props.space.userId;
   };
 
   render () {
