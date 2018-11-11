@@ -8,11 +8,11 @@ export class NotificationsApiService {
       .then((response) => {
         console.log('response', response);
         return response.data.map((responseItem) => {
-          const payload = JSON.parse(responseItem.payload);
-          const room = JSON.parse(payload.room);
-          const space = JSON.parse(payload.space);
-          const user = JSON.parse(payload.user);
-          const message = payload.message;
+          const payload = JSON.parse(responseItem.payload) || {};
+          const room = JSON.parse(payload.room) || {};
+          const space = JSON.parse(payload.space) || {};
+          const user = JSON.parse(payload.user) || {};
+          const message = payload.message || '';
 
           return {
             ...responseItem,
