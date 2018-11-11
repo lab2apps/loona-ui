@@ -227,7 +227,7 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
               <input type="text" name="end date" value={endDateString} readOnly/>
             </div>
 
-            <div className="l-centralizer l-border-box">
+            <div className="l-centralizer l-border-box l-calendar">
               <DayPickerRangeController
                 onPrevMonthClick={this.onMonthChange}
                 onNextMonthClick={this.onMonthChange}
