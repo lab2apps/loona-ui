@@ -37,7 +37,7 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
     this.updateOrders();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     if (prevProps.room !== this.props.room) {
       this.updateOrders();
     }
@@ -131,6 +131,7 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
           <List>
             <Cell
               size="l"
+              indicator={this.props.room.myRent && <div className='l-indicator--rented'>арендую</div>}
               description={ROOM_TYPES[this.props.room.roomType]}
               bottomContent={
                 <div style={{ display: 'flex', paddingTop: '10px' }}>
@@ -167,10 +168,8 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
                     {this.props.room.description}
                   </div>
                 </InfoRow>
-
               </Cell>
             )}
-
 
             <Cell>
               <div className='l-flex'>
@@ -186,9 +185,16 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
                 </InfoRow>
                 }
 
-                {this.props.room.price &&
-                <InfoRow title="Цена" className="l-flex__item">
-                  {this.props.room.price} ₽
+                {this.props.room.price !== 0 &&
+                <InfoRow title="Цена, ₽" className="l-flex__item">
+                  {this.props.room.price || 'Бесплатно'}
+                </InfoRow>
+                }
+
+
+                {this.props.room.price === 0 &&
+                <InfoRow title="Цена, ₽" className="l-flex__item">
+                  Бесплатно
                 </InfoRow>
                 }
               </div>
