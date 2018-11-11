@@ -11,7 +11,7 @@ import { getRoom } from '../../../store/actions/roomActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-const osname = platform();
+export const osname = platform();
 
 type BookingRoomProps = {}
 
