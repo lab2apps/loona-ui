@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View, Panel, Epic, Tabbar, TabbarItem } from '@vkontakte/vkui';
+import { View, Panel, Epic, Tabbar, TabbarItem, ActionSheet, ActionSheetItem } from '@vkontakte/vkui';
 import { withRouter } from 'react-router-dom';
 
 import { EditSpace } from '../edit-space/EditSpace';
@@ -18,11 +18,14 @@ import Icon28Menu from '@vkontakte/icons/dist/28/menu';
 
 import './main.scss';
 import { SendMessage } from '../send-message/SendMessage';
+import { Filter } from '../filter/Filter';
 import { Notifications } from '../notifications/Notifications';
 
 @withRouter
 export class Main extends React.PureComponent {
-  state = {};
+  state = {
+    showFilters: false,
+  };
 
   static getDerivedStateFromProps (props, state) {
     let newActiveStory    = props.history.location.pathname.split('/')[1];
@@ -56,35 +59,40 @@ export class Main extends React.PureComponent {
     const hasTabbar = !['/my/edit-space', '/my/edit-room', '/my/book-room'].includes(this.state.activePanel);
 
     return (
-      <Epic activeStory={ this.state.activeStory }
+      <Epic activeStory={this.state.activeStory}
             tabbar={
-              <Tabbar className={ hasTabbar ? '' : 'l-hidden' }>
-                <TabbarItem onClick={ this.goToPanel('/all') }
-                            selected={ this.state.activeStory === '/all' }>
-                  <Icon28Newsfeed className={ 'l-icon--24' }/>
+              <Tabbar className={hasTabbar ? '' : 'l-hidden'}>
+                <TabbarItem onClick={this.goToPanel('/all')}
+                            selected={this.state.activeStory === '/all'}>
+                  <Icon28Newsfeed className={'l-icon--24'}/>
                 </TabbarItem>
 
-                <TabbarItem onClick={ this.goToPanel('/my') }
-                            selected={ this.state.activeStory === '/my' }>
+                <TabbarItem onClick={this.goToPanel('/my')}
+                            selected={this.state.activeStory === '/my'}>
                   <Icon24FavoriteOutline/>
                 </TabbarItem>
 
-                <TabbarItem onClick={ this.goToPanel('/notifications') }
-                            selected={ this.state.activeStory === '/notifications' }>
-                  <Icon28Notifications className={ 'l-icon--24' }/>
+                <TabbarItem onClick={this.goToPanel('/notifications')}
+                            selected={this.state.activeStory === '/notifications'}>
+                  <Icon28Notifications className={'l-icon--24'}/>
                 </TabbarItem>
 
-                <TabbarItem onClick={ this.goToPanel('/additional') }
-                            selected={ this.state.activeStory === '/additional' }>
-                  <Icon28Menu className={ 'l-icon--24' }/>
+                <TabbarItem onClick={this.goToPanel('/additional')}
+                            selected={this.state.activeStory === '/additional'}>
+                  <Icon28Menu className={'l-icon--24'}/>
                 </TabbarItem>
               </Tabbar>
             }
       >
         <View id='/all'
-              activePanel={ this.state.activePanel }>
+              popout={this.state.showFilters && <Filter onSubmit={() => {
+                this.setState({ showFilters: false })
+              }}/>}
+              activePanel={this.state.activePanel}>
           <Panel id='/all' className="l-panel--full-height">
-            <AllSpaces/>
+            <AllSpaces showFilters={() => {
+              this.setState({ showFilters: true })
+            }}/>
           </Panel>
 
           <Panel id='/all/space-details'>
@@ -97,7 +105,7 @@ export class Main extends React.PureComponent {
         </View>
 
         <View id='/my'
-              activePanel={ this.state.activePanel }>
+              activePanel={this.state.activePanel}>
           <Panel id='/my' className="l-panel--full-height">
             <MySpaces/>
           </Panel>
@@ -135,7 +143,7 @@ export class Main extends React.PureComponent {
         </View>
 
         <View id='/additional'
-              activePanel={ this.state.activePanel }>
+              activePanel={this.state.activePanel}>
           <Panel id='/additional'/>
         </View>
       </Epic>

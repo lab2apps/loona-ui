@@ -163,7 +163,7 @@ export class EditRoomForm extends React.PureComponent<EditRoomFormProps> {
         {/*</Div>*/}
 
 
-        <FormLayoutGroup top="Дни работы площадки">
+        <FormLayoutGroup top="Допольнительные удобства">
           <Checkbox name={ 'options' } value={ '1' }
                     defaultChecked={ this.props.room && this.props.room.options.includes('1') }>Wi-Fi</Checkbox>
           <Checkbox name={ 'options' } value={ '2' }
