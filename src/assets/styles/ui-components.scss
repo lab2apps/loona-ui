@@ -74,3 +74,10 @@
 .l-hidden {
   display: none !important;
 }
+
+.l-notification-item {
+  a {
+    color: var(--accent) !important;
+    text-decoration: none;
+  }
+}

@@ -116,6 +116,7 @@ export class NotificationListItem extends React.PureComponent<NotificationListIt
     return (
       <Cell before={<Avatar src={this.getImageUrl(this.props.notification)}/>}
             multiline
+            className="l-notification-item"
             description={<React.Fragment>
               <div>{this.buildTimeText(this.props.notification)}</div>
             </React.Fragment>}>
@@ -136,7 +137,7 @@ export class NotificationListItem extends React.PureComponent<NotificationListIt
 
   getImageUrl (notification) {
     const imageId = (notification.room.imageUrls && notification.room.imageUrls[0]) ||
-      (notification.space.imageUrls && notification.space.imageUrls[0])
+      (notification.space.imageUrls && notification.space.imageUrls[0]);
 
     return imageId ? `${environment.apiUrl}/image/${imageId}` : null;
   }
