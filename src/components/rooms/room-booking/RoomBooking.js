@@ -15,6 +15,9 @@ import Icon24Flash from '@vkontakte/icons/dist/24/flash';
 import Icon24Recent from '@vkontakte/icons/dist/24/recent';
 import moment from 'moment';
 import { RoomApiService } from '../../../services/RoomApiService';
+import * as vkConnect from '@vkontakte/vkui-connect';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 type RoomInfo = {}
 
@@ -22,6 +25,7 @@ type RoomDetailsProps = {
   room: RoomInfo
 }
 
+@withRouter
 export class RoomBooking extends React.PureComponent<RoomDetailsProps> {
 
   state = {
@@ -55,7 +59,7 @@ export class RoomBooking extends React.PureComponent<RoomDetailsProps> {
 
   componentDidMount () {
     this.updateOrders();
-
+    console.warn('location', window.location);
   }
 
   isDateBlocked = (day) => {
@@ -106,7 +110,24 @@ export class RoomBooking extends React.PureComponent<RoomDetailsProps> {
   };
 
   confirmBooking = () => {
+    RoomApiService.confirmBooking(this.props.room.uuid, this.state.startDate, this.state.endDate).then((data) => {
 
+      window._vk_pay_room = this.props.room.uuid;
+      window._vk_pay_order = data.orderId;
+
+      vkConnect.send("VKWebAppOpenPayForm", {
+        "app_id": 6746619,
+        "action": "pay-to-group",
+        "params": {
+          "amount": data.price,
+          "description": `Бронирование ${this.props.room.uuid}`,
+          "group_id": data.receiverId,
+          "extra": `${data.orderId}:${this.props.room.uuid}`,
+        },
+      });
+
+      this.props.history.push(`/all/room-details?id=${this.props.room.uuid}`);
+    })
   };
 
   render () {
@@ -207,7 +228,7 @@ export class RoomBooking extends React.PureComponent<RoomDetailsProps> {
 
           <Div>
             <Button size="xl" level="primary" disabled={!this.state.endDate || !this.state.startDate}
-                    onClick={this.confirmBoooking}>Подтвердить бронь</Button>
+                    onClick={this.confirmBooking}>Подтвердить бронь</Button>
           </Div>
         </Group>
       </React.Fragment>

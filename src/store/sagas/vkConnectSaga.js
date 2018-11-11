@@ -3,7 +3,8 @@ import { eventChannel } from 'redux-saga';
 import connect from '@vkontakte/vkui-connect';
 
 import { VkGetUserAction } from '../actions/vkActions';
-
+import { RoomApiService } from '../../services/RoomApiService';
+import { RoomGetActionType } from '../actions/roomActions';
 
 function subscribeToVkEvents () {
   return eventChannel((emit) => {
@@ -14,8 +15,39 @@ function subscribeToVkEvents () {
             type: VkGetUserAction.SUCCESS,
             payload: {
               data: detail.data,
-            }
+            },
           });
+
+          break;
+        }
+
+        case 'VKWebAppOpenPayFormResult': {
+          //const [orderId, roomId] = detail.data.result.extra;
+
+          let promise;
+
+          if (detail.data.result.status) {
+             promise =RoomApiService.successPayment(window._vk_pay_order);
+          } else {
+            promise = RoomApiService.failPayment(window._vk_pay_order);
+          }
+
+          promise.then(() => {
+            RoomApiService.get(window._vk_pay_room).then((data) => {
+              emit({
+                type: RoomGetActionType.SUCCESS,
+                payload: {
+                  data,
+                }
+              });
+            });
+
+
+            delete window._vk_pay_room;
+            delete window._vk_pay_order;
+
+          });
+
 
           break;
         }

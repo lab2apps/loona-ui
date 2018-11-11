@@ -37,6 +37,12 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
     this.updateOrders();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.room !== this.props.room) {
+      this.updateOrders();
+    }
+  }
+
   onMonthChange = (date) => {
     this.setState({
       currentMonth: moment(date),
