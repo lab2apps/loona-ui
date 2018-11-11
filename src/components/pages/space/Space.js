@@ -15,10 +15,14 @@ type SpaceDetailsProps = {}
 @connect(mapStateToProps, mapDispatchToProps)
 export class Space extends React.PureComponent<SpaceDetailsProps> {
   componentDidMount () {
+    this.getSpace();
+  }
+
+  getSpace = (fetching = true) => {
     const { id } = querystring.parse(this.props.location.search);
 
-    this.props.getSpace(id);
-  }
+    this.props.getSpace(id, fetching);
+  };
 
   render () {
     return (
@@ -27,8 +31,9 @@ export class Space extends React.PureComponent<SpaceDetailsProps> {
           Детали площадки
         </PanelHeader>
 
-        { !this.props.fetching &&
-        <SpaceDetails space={ this.props.space }>
+        {!this.props.fetching &&
+        <SpaceDetails space={this.props.space}
+                      onLike={() => {this.getSpace(false)}}>
         </SpaceDetails>
         }
 

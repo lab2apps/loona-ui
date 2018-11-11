@@ -17,6 +17,7 @@ import Icon28Notifications from '@vkontakte/icons/dist/28/notifications';
 import Icon28Menu from '@vkontakte/icons/dist/28/menu';
 
 import './main.scss';
+import { SendMessage } from '../send-message/SendMessage';
 import { Notifications } from '../notifications/Notifications';
 
 @withRouter
@@ -107,6 +108,10 @@ export class Main extends React.PureComponent {
 
           <Panel id='/my/room-details'>
             <Room/>
+          </Panel>
+
+          <Panel id='/my/send-message'>
+            <SendMessage/>
           </Panel>
 
           <Panel id='/my/edit-space' className='l-panel l-panel--no-tabbar'>

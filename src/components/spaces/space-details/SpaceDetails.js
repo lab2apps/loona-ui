@@ -6,6 +6,7 @@ import {
   List,
   Cell,
   Tabs,
+  Div,
   TabsItem,
   InfoRow,
   Gallery,
@@ -22,6 +23,7 @@ import { getRooms } from '../../../store/actions/roomActions';
 import { environment } from '../../../config/environment';
 import { WEEKDAYS } from '../../../contants/WEEKDAYS';
 import { SPACE_TYPES } from '../../../contants/SPACE_TYPES';
+import axios from 'axios';
 
 const SPACE_DETAILS_TABS = {
   ALL_ROOMS: 'ALL_ROOMS',
@@ -30,6 +32,7 @@ const SPACE_DETAILS_TABS = {
 
 type SpaceDetailsProps = {
   space: any;
+  onLike: () => void;
 }
 
 @withRouter
@@ -49,7 +52,7 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
   };
 
   onMessageButtonClick = () => {
-    console.warn('NOT IMPLEMENTED');
+    this.props.history.push(`/my/send-message?spaceId=${ this.props.space.uuid }`);
   };
 
   componentDidMount () {
@@ -59,17 +62,30 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
   }
 
   addToFavorites = () => {
+    let promise;
+    if (this.props.space.myLike) {
+      promise = axios.delete(`${environment.apiUrl}/api/space/${this.props.space.uuid}/favorite`);
+    } else {
+      promise = axios.post(`${environment.apiUrl}/api/space/${this.props.space.uuid}/favorite`);
+    }
 
+    promise.then(() => {
+      this.props.onLike();
+    });
+  };
+
+  sendMessage = () => {
+    window.location.replace('https://vk.com/im?sel=' + this.props.space.userId)
   };
 
   render () {
     return (
       <React.Fragment>
 
-        { this.props.space.moderated &&
+        {this.props.space.moderated &&
         <Group>
           <div className='l-notification'>
-            <div className="l-notification__icon" style={ { color: 'var(--yellow)' } }>
+            <div className="l-notification__icon" style={{ color: 'var(--yellow)' }}>
               <Icon24About/>
             </div>
             <div className="l-notification__content l-text-gray">
@@ -83,42 +99,59 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
 
 
         <Group>
-          { this.props.space.imageUrls.length > 0 && (
-            <Gallery style={ { height: 150 } }
-                     bullets={ 'dark' }>
-              { this.props.space.imageUrls.map((image) => {
-                return <img src={ `${environment.apiUrl}/image/${image}` } alt="space pics"/>;
-              }) }
+          {this.props.space.imageUrls.length > 0 && (
+            <Gallery style={{ height: 150 }}
+                     bullets={'dark'}>
+              {this.props.space.imageUrls.map((image) => {
+                return <img src={`${environment.apiUrl}/image/${image}`} alt="space pics"/>;
+              })}
             </Gallery>
-          ) }
+          )}
 
           <List>
             <Cell
               size="l"
-              description={ SPACE_TYPES[this.props.space.type] }
+              description={SPACE_TYPES[this.props.space.type]}
               bottomContent={
 
                 // FOR OWNER ONLY
-                <div style={ { display: 'flex', paddingTop: '10px' } }>
-                  <Button size="l" stretched style={ { marginRight: 8 } }
-                          onClick={ this.onMessageButtonClick }>Сообщение</Button>
-                  { this.props.space.mySpace ? (<Button size="l" stretched level="secondary"
-                                                        onClick={ this.onEditButtonClick }>Редактировать</Button>) : (
-                    <Button size="l" stretched level="secondary"
-                            onClick={ this.addToFavorites }>В избранное</Button>
-                  ) }
+                <div style={{ display: 'flex', paddingTop: '10px' }}>
+
+                  {!this.props.space.mySpace && (<Button size="l" stretched style={{ marginRight: 8 }}
+                                                         onClick={this.sendMessage}>Связаться</Button>)}
+
+
+                  {this.props.space.mySpace && (<Button size="l" stretched style={{ marginRight: 8 }}
+                                                        onClick={this.onMessageButtonClick}>Рассылка</Button>)}
+
+
+                  {this.props.space.mySpace ? (<Button size="l" stretched level="secondary"
+                                                       onClick={this.onEditButtonClick}>Редактировать</Button>) : (
+                    <React.Fragment>
+                      {this.props.space.myLike && (
+                        <Button size="l" stretched level="secondary"
+                                onClick={this.addToFavorites}>Отписаться</Button>
+                      )}
+
+                      {!this.props.space.myLike && (
+                        <Button size="l" stretched level="commerce"
+                                onClick={this.addToFavorites}>В избранное</Button>
+                      )}
+
+                    </React.Fragment>
+                  )}
 
                 </div>
 
               }>
-              { this.props.space.name }
+              {this.props.space.name}
             </Cell>
 
-            { this.props.space.address &&
-            <Cell before={ <Icon24Place/> }
+            {this.props.space.address &&
+            <Cell before={<Icon24Place/>}
                   expandable
-                  onClick={ () => this.setState({ activePanel: 'nothing' }) }>
-              { this.props.space.address }
+                  onClick={() => this.setState({ activePanel: 'nothing' })}>
+              {this.props.space.address}
             </Cell>
             }
           </List>
@@ -129,14 +162,14 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
             <Cell size="l">
               <Tabs type="buttons">
                 <TabsItem
-                  onClick={ () => this.setState({ selectedTab: SPACE_DETAILS_TABS.ALL_ROOMS }) }
-                  selected={ this.state.selectedTab === SPACE_DETAILS_TABS.ALL_ROOMS }
+                  onClick={() => this.setState({ selectedTab: SPACE_DETAILS_TABS.ALL_ROOMS })}
+                  selected={this.state.selectedTab === SPACE_DETAILS_TABS.ALL_ROOMS}
                 >
                   Список мест
                 </TabsItem>
                 <TabsItem
-                  onClick={ () => this.setState({ selectedTab: SPACE_DETAILS_TABS.ABOUT_SPACE }) }
-                  selected={ this.state.selectedTab === SPACE_DETAILS_TABS.ABOUT_SPACE }
+                  onClick={() => this.setState({ selectedTab: SPACE_DETAILS_TABS.ABOUT_SPACE })}
+                  selected={this.state.selectedTab === SPACE_DETAILS_TABS.ABOUT_SPACE}
                 >
                   О площадке
                 </TabsItem>
@@ -147,49 +180,62 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
               (this.state.selectedTab === SPACE_DETAILS_TABS.ALL_ROOMS) &&
 
               <React.Fragment>
-                { this.props.rooms.rooms && <RoomsList rooms={ this.props.rooms.rooms }/> }
+                {this.props.rooms.rooms && this.props.rooms.rooms.length === 0 && (
+                  <Cell multiline={true}
+                        style={{ textAlign: 'center' }}>
+                    На этой площадке пока пусто :(
 
-                { this.props.space.mySpace && (
+
+                    {this.props.space.mySpace &&
+                    <React.Fragment><br/>Пришло время добавить места, которые смогут арендовать ваши
+                      посетители</React.Fragment>}
+                  </Cell>
+                )}
+
+                {this.props.rooms.rooms && <RoomsList rooms={this.props.rooms.rooms}/>}
+
+                {this.props.space.mySpace && (
                   <Cell>
                     <CellButton
                       align="center"
-                      before={ <Icon24Add/> }
-                      onClick={ this.onCreateRoomButtonClick }>
+                      before={<Icon24Add/>}
+                      onClick={this.onCreateRoomButtonClick}>
                       Добавить место
                     </CellButton>
                   </Cell>
-                ) }
+                )}
               </React.Fragment>
             }
 
             {
               (this.state.selectedTab === SPACE_DETAILS_TABS.ABOUT_SPACE) &&
               <React.Fragment>
-                { this.props.space.description && (
+                {this.props.space.description && (
                   <Cell>
                     <InfoRow title="Описание площадки">
-                      { this.props.space.description }
+                      {this.props.space.description}
                     </InfoRow>
                   </Cell>
-                ) }
+                )}
 
-                { this.props.space.phone && (
+                {this.props.space.phone && (
                   <Cell>
                     <InfoRow title="Телефон для связи">
-                      { this.props.space.phone }
+                      {this.props.space.phone}
                     </InfoRow>
                   </Cell>
-                ) }
+                )}
 
                 <Cell>
                   <InfoRow title="Дни работы площадки">
-                    { this.props.space.workDays.length === 7 ? 'Eжедневно' : this.props.space.workDays.map(item => WEEKDAYS[item]).join(', ') }
+                    {this.props.space.workDays.length === 7 ? 'Eжедневно' : this.props.space.workDays.map(
+                      item => WEEKDAYS[item]).join(', ')}
                   </InfoRow>
                 </Cell>
 
                 <Cell>
                   <InfoRow title="Время работы площадки">
-                    { this.props.space.startWorkTime } — { this.props.space.endWorkTime }
+                    {this.props.space.startWorkTime} — {this.props.space.endWorkTime}
                   </InfoRow>
                 </Cell>
               </React.Fragment>

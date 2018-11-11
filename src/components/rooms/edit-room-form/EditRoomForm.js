@@ -141,26 +141,26 @@ export class EditRoomForm extends React.PureComponent<EditRoomFormProps> {
           </Select>
         </FormLayoutGroup>
 
-        <Div>
-          <Tabs type="buttons" className="l-tabs-primary">
-            <TabsItem
-              onClick={ () => this.setState({ bookType: BOOK_TYPES.WITH_CONFIRMATION }) }
-              selected={ this.state.bookType === BOOK_TYPES.WITH_CONFIRMATION }
-            >
-              С подтверждением
-            </TabsItem>
-            <TabsItem
-              onClick={ () => this.setState({ bookType: BOOK_TYPES.WITHOUT_CONFIRMATION }) }
-              selected={ this.state.bookType === BOOK_TYPES.WITHOUT_CONFIRMATION }
-            >
-              Моментально
-            </TabsItem>
+        {/*<Div>*/}
+          {/*<Tabs type="buttons" className="l-tabs-primary">*/}
+            {/*<TabsItem*/}
+              {/*onClick={ () => this.setState({ bookType: BOOK_TYPES.WITH_CONFIRMATION }) }*/}
+              {/*selected={ this.state.bookType === BOOK_TYPES.WITH_CONFIRMATION }*/}
+            {/*>*/}
+              {/*С подтверждением*/}
+            {/*</TabsItem>*/}
+            {/*<TabsItem*/}
+              {/*onClick={ () => this.setState({ bookType: BOOK_TYPES.WITHOUT_CONFIRMATION }) }*/}
+              {/*selected={ this.state.bookType === BOOK_TYPES.WITHOUT_CONFIRMATION }*/}
+            {/*>*/}
+              {/*Моментально*/}
+            {/*</TabsItem>*/}
 
-            <div style={ { display: 'none' } }>
-              <Input type='text' value={ this.state.bookType } name={ 'bookingType' }/>
-            </div>
-          </Tabs>
-        </Div>
+            {/*<div style={ { display: 'none' } }>*/}
+              {/*<Input type='text' value={B OOK_TYPES.WITHOUT_CONFIRMATION } name={ 'bookingType' }/>*/}
+            {/*</div>*/}
+          {/*</Tabs>*/}
+        {/*</Div>*/}
 
 
         <FormLayoutGroup top="Дни работы площадки">
@@ -176,6 +176,11 @@ export class EditRoomForm extends React.PureComponent<EditRoomFormProps> {
                     defaultChecked={ this.props.room && this.props.room.options.includes('5') }>Микрофон</Checkbox>
           <Checkbox name={ 'options' } value={ '6' }
                     defaultChecked={ this.props.room && this.props.room.options.includes('6') }>МФУ</Checkbox>
+
+
+          <div style={ { display: 'none' } }>
+            <Input type='text' value={BOOK_TYPES.WITHOUT_CONFIRMATION } name={ 'bookingType' }/>
+          </div>
         </FormLayoutGroup>
 
         <Button size="xl" level="primary">{ this.props.room ? 'Сохранить' : 'Добавить место' }</Button>

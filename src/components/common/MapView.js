@@ -1,5 +1,6 @@
 import React from 'react';
 import { YMaps as YMapsContainer, Map as YMap, Placemark } from 'react-yandex-maps';
+import { withRouter } from 'react-router-dom';
 
 export type Point = {
   name: string,
@@ -10,6 +11,7 @@ type MavViewProps = {
   points: Point[]
 }
 
+@withRouter
 export class MapView extends React.PureComponent<MavViewProps> {
 
   state = {
@@ -27,7 +29,7 @@ export class MapView extends React.PureComponent<MavViewProps> {
 
   ready () {
     const mapInstance = this.state.mapInstance;
-    const geoObjects = mapInstance.geoObjects;
+    const geoObjects  = mapInstance.geoObjects;
   }
 
   componentDidUpdate (...args) {
@@ -37,19 +39,19 @@ export class MapView extends React.PureComponent<MavViewProps> {
     }
   }
 
-  mapRef =  (mapInstance) => {
-    console.log('mapInstance',mapInstance);
-    this.setState({mapInstance});
+  mapRef = (mapInstance) => {
+    console.log('mapInstance', mapInstance);
+    this.setState({ mapInstance });
   };
 
   componentDidMount (...args) {
-    console.warn('componentDidMount',...args);
+    console.warn('componentDidMount', ...args);
 
     this.getCurrentPosition()
-      .then((position)=>{
+      .then((position) => {
 
       })
-      .catch((err)=>{
+      .catch((err) => {
         console.warn('geolocation error', err);
       });
   }
@@ -60,7 +62,9 @@ export class MapView extends React.PureComponent<MavViewProps> {
         <YMapsContainer version="2.1">
           <YMap defaultState={this.state.mapOptions} instanceRef={this.mapRef} width="100%" height="100%">
             {
-              this.props.points.map((point, i)=> <Placemark geometry={point.coords} key={i} /> )
+              this.props.points.map((point, i) => <Placemark geometry={point.coords} key={i} onClick={() => {
+                this.props.history.push('/all/space-details?id=' + point.id);
+              }}/>)
             }
           </YMap>
         </YMapsContainer>
@@ -69,9 +73,9 @@ export class MapView extends React.PureComponent<MavViewProps> {
   }
 
   getCurrentPosition () {
-    return new Promise((resolve,reject)=>{
-      navigator.geolocation.getCurrentPosition(resolve,reject);
-    }).then((position)=>{
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    }).then((position) => {
       const { latitude, longitude } = position.coords;
 
       this.setState({
@@ -79,7 +83,7 @@ export class MapView extends React.PureComponent<MavViewProps> {
         mapOptions: {
           ...this.state.mapOptions,
           center: [latitude, longitude],
-        }
+        },
       });
 
       return position;

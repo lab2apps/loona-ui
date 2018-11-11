@@ -29,3 +29,26 @@
 .l-bg-white {
   background-color: #fff !important;
 }
+
+.l-calendar {
+  .CalendarDay__blocked_calendar {
+    background: rgba(238, 93, 74, 0.2)!important;
+    border-color: rgba(238, 93, 74, 0.2)!important;;
+  }
+
+  .CalendarDay__selected_start {
+    background-color: #5C81B4!important;
+    border-color: #5C81B4!important;
+  }
+
+  .CalendarDay__selected_span {
+    background-color: rgba(92, 129, 180, 0.3)!important;
+    border-color: rgba(92, 129, 180, 0.3)!important;
+    color: initial!important;
+  }
+
+  .CalendarDay__selected_end {
+    background-color: #5C81B4!important;
+    border-color: #5C81B4!important;
+  }
+}

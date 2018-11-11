@@ -16,7 +16,7 @@ type SplashScreenRouteProps = {
 @withRouter
 class SplashScreenRoute extends React.Component<SplashScreenRouteProps> {
   state = {
-    delay: false,
+    delay: true,
   };
 
   componentDidMount () {

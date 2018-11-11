@@ -15,6 +15,7 @@ import { Onboarding } from './components/pages/onboarding/Onboarding';
 
 import 'styles/app.scss';
 
+
 @withRouter
 @connect(mapStateToProps, mapDispatchToProps)
 export class App extends Component {

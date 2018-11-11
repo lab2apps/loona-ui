@@ -4,22 +4,33 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import vkConnect from '@vkontakte/vkui-connect';
+
 import './onboarding.scss';
 
-import onboardingImage1 from 'images/onboarding1.png';
+import onboardingImage1 from 'images/onboard1.svg';
+import onboardingImage2 from 'images/onboard2.svg';
+import onboardingImage3 from 'images/onboard3.svg';
+
 
 import { hideOnBoarding } from '../../../store/actions/settingsActions';
+import { makeIcon } from '../../common/Icons';
 
 const onBoardingItems = [
   {
-    title: 'Заголовок экрана',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    title: 'Аренда мест на площадках',
+    description: 'Бронируйте и оплачивайте помещения в арт-пространствах, бизнес-центрах и места в коворкингах и тайм-кафе',
     image: onboardingImage1,
   },
   {
-    title: 'Заголовок экрана',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-    image: onboardingImage1,
+    title: 'Сдать в аренду место на площадке',
+    description: 'Размещайте свободные места на своих площадках, чтобы люди могли бронировать и оплачивать аренду не выходя из ВК',
+    image: onboardingImage2,
+  },
+  {
+    title: 'Оповещения',
+    description: 'Получайте оповещения внутри ВК о всех активностях на площадках, которыми вы владеете и на которые вы подписаны',
+    image: onboardingImage3,
   },
 ];
 
@@ -35,6 +46,8 @@ export class Onboarding extends React.PureComponent {
   };
 
   goToMainPage = () => {
+    vkConnect.send("VKWebAppAllowNotifications", {});
+
     this.props.hideOnBoarding();
     this.props.history.replace('/');
   };
@@ -57,7 +70,8 @@ export class Onboarding extends React.PureComponent {
               return (
                 <div className='l-onboarding__item'
                      key={ index }>
-                  <img src={ item.image } className='l-onboarding__image' alt="onboarding pics"/>
+
+                  {makeIcon(item.image.id, 'l-onboarding__image')}
 
                   <div className='l-onboarding__title'>
                     { item.title }

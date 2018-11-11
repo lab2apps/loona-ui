@@ -172,7 +172,7 @@ export class RoomBooking extends React.PureComponent<RoomDetailsProps> {
                     <Icon24Flash/>
                   </div>
                   <div className="l-notification__content l-text-gray">
-                    Место бронируется без подтверждения
+                    Место бронируется без подтверждения арендодателя
                   </div>
                 </div>
               </Cell>
@@ -211,7 +211,7 @@ export class RoomBooking extends React.PureComponent<RoomDetailsProps> {
               <input type="text" name="endRentTime" value={endDateString} readOnly/>
             </div>
 
-            <div className="l-centralizer l-border-box">
+            <div className="l-centralizer l-border-box l-calendar">
               <DayPickerRangeController
                 onDatesChange={this.onDatesChange}
                 onFocusChange={this.onFocusChange}

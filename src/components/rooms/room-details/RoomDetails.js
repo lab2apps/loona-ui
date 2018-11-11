@@ -108,6 +108,10 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
     });
   };
 
+  sendMessage = () => {
+    window.location.replace('https://vk.com/im?sel=' + this.props.room.userId)
+  };
+
   render () {
     const { focusedInput, startDate, endDate } = this.state;
 
@@ -148,7 +152,7 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
 
                   {!this.props.room.mySpace && (
                     <Button size="l" stretched level="secondary"
-                            onClick={this.onBookRoomReviewButtonClick}>На просмотр
+                            onClick={this.sendMessage}>На просмотр
                     </Button>
                   )}
                 </div>
@@ -227,7 +231,7 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
               <input type="text" name="end date" value={endDateString} readOnly/>
             </div>
 
-            <div className="l-centralizer l-border-box">
+            <div className="l-centralizer l-border-box l-calendar">
               <DayPickerRangeController
                 onPrevMonthClick={this.onMonthChange}
                 onNextMonthClick={this.onMonthChange}
