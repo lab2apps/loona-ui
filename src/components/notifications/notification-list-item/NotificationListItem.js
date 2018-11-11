@@ -60,42 +60,50 @@ type NotificationListItemProps = {
 const NOTIFICATION_TYPES_TO_TEMPLATES = {
   USER_ORDER_CREATED: (n) => {
     return <React.Fragment>
-      <Link to={getSpaceLinkUrl(n)}>{n.space.name}</Link>: заявка на бронирование места <Link to={getRoomLinkUrl(n)}>{n.room.name}</Link> создана
+      <Link to={getSpaceLinkUrl(n)}>{n.space.name}</Link>: заявка на бронирование места <Link
+      to={getRoomLinkUrl(n)}>{n.room.name}</Link> создана
     </React.Fragment>
   },
   USER_ORDER_PAYED: (n) => {
     return <React.Fragment>
-      <Link to={getSpaceLinkUrl(n)}>{n.space.name}</Link>: заявка на бронирование места <Link to={getRoomLinkUrl(n)}>{n.room.name}</Link> одобрена
+      <Link to={getSpaceLinkUrl(n)}>{n.space.name}</Link>: заявка на бронирование места <Link
+      to={getRoomLinkUrl(n)}>{n.room.name}</Link> одобрена
     </React.Fragment>
   },
   USER_ORDER_FAILED: (n) => {
     return <React.Fragment>
-      <Link to={getSpaceLinkUrl(n)}>{n.space.name}</Link>: заявка на бронирование места <Link to={getRoomLinkUrl(n)}>{n.room.name}</Link> отклонена
+      <Link to={getSpaceLinkUrl(n)}>{n.space.name}</Link>: заявка на бронирование места <Link
+      to={getRoomLinkUrl(n)}>{n.room.name}</Link> отклонена
     </React.Fragment>
   },
   OWNER_ORDER_CREATED: (n) => {
     return <React.Fragment>
-      <Link to={getSpaceLinkUrl(n)}>{n.space.name}</Link>: получен запрос на бронирование места <Link to={getRoomLinkUrl(n)}>{n.room.name}</Link>
+      <Link to={getSpaceLinkUrl(n)}>{n.space.name}</Link>: получен запрос на бронирование места <Link
+      to={getRoomLinkUrl(n)}>{n.room.name}</Link>
     </React.Fragment>
   },
   OWNER_ORDER_PAYED: (n) => {
     return <React.Fragment>
-      <Link to={getSpaceLinkUrl(n)}>{n.space.name}</Link>: забронировано и оплачено место <Link to={getRoomLinkUrl(n)}>{n.room.name}</Link>
+      <Link to={getSpaceLinkUrl(n)}>{n.space.name}</Link>: забронировано и оплачено место <Link
+      to={getRoomLinkUrl(n)}>{n.room.name}</Link>
     </React.Fragment>
   },
   OWNER_ORDER_FAILED: (n) => {
     return <React.Fragment>
-      <Link to={getSpaceLinkUrl(n)}>{n.space.name}</Link>: бронь на место <Link to={getRoomLinkUrl(n)}>{n.room.name}</Link> отменена
+      <Link to={getSpaceLinkUrl(n)}>{n.space.name}</Link>: бронь на место <Link
+      to={getRoomLinkUrl(n)}>{n.room.name}</Link> отменена
     </React.Fragment>
   },
   ORDER_SYSTEM_INVALIDATION: (n) => {
     return <React.Fragment>
-      <Link to={getSpaceLinkUrl(n)}>{n.space.name}</Link>: заявка на бронирование места <Link to={getRoomLinkUrl(n)}>{n.room.name}</Link> устарела
+      <Link to={getSpaceLinkUrl(n)}>{n.space.name}</Link>: заявка на бронирование места <Link
+      to={getRoomLinkUrl(n)}>{n.room.name}</Link> устарела
     </React.Fragment>
   },
   NEW_ROOM_ADDED: (n) => {
     return <React.Fragment>
-      <Link to={getSpaceLinkUrl(n)}>{n.space.name}</Link>: на площадке добавлено новое место <Link to={getRoomLinkUrl(n)}>{n.room.name}</Link>
+      <Link to={getSpaceLinkUrl(n)}>{n.space.name}</Link>: на площадке добавлено новое место <Link
+      to={getRoomLinkUrl(n)}>{n.room.name}</Link>
     </React.Fragment>
   },
   MESSAGE_SPACE_FOLLOWERS: (n) => {
@@ -114,7 +122,7 @@ export class NotificationListItem extends React.PureComponent<NotificationListIt
 
   render () {
     return (
-      <Cell before={<Avatar src={this.getImageUrl(this.props.notification)}/>}
+      <Cell before={<Avatar src={this.getImageUrl(this.props.notification)} type="image" size={48}/>}
             multiline
             className="l-notification-item"
             description={<React.Fragment>
