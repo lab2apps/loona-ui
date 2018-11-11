@@ -35,7 +35,6 @@ export class RoomApiService {
       });
   }
 
-
   static remove (id) {
     return axios.delete(`${environment.apiUrl}/api/room/${id}`)
       .then(response => {
@@ -54,5 +53,27 @@ export class RoomApiService {
       .then((response) => {
         return response.data;
       });
+  }
+
+  static confirmBooking (roomId, startRentTime, endRentTime) {
+    return axios.post(`${environment.apiUrl}/api/order`, {
+      roomId,
+      startRentTime,
+      endRentTime,
+    }).then((response) => {
+      return response.data;
+    });
+  }
+
+  static successPayment (orderId) {
+    return axios.get(`${environment.apiUrl}/api/order/${orderId}/submit`).then((response) => {
+      return response.data;
+    });
+  }
+
+  static failPayment (orderId) {
+    return axios.get(`${environment.apiUrl}/api/order/${orderId}/fail`).then((response) => {
+      return response.data;
+    });
   }
 }
