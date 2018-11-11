@@ -75,7 +75,7 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
   };
 
   sendMessage = () => {
-    window.location.href = 'vk://vk.com/im?sel=' + this.props.space.userId;
+    window.location.replace('https://vk.me/id' + this.props.space.userId);
   };
 
   render () {
@@ -118,7 +118,8 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
                 <div style={{ display: 'flex', paddingTop: '10px' }}>
 
                   {!this.props.space.mySpace && (<Button size="l" stretched style={{ marginRight: 8 }}
-                                                         onClick={this.sendMessage}>Связаться</Button>)}
+                                                         component={'a'}
+                                                         href={'https://vk.me/id' + this.props.space.userId}>Связаться</Button>)}
 
 
                   {this.props.space.mySpace && (<Button size="l" stretched style={{ marginRight: 8 }}

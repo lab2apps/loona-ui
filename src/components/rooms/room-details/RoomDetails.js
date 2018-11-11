@@ -152,7 +152,8 @@ export class RoomDetails extends React.PureComponent<RoomDetailsProps> {
 
                   {!this.props.room.mySpace && (
                     <Button size="l" stretched level="secondary"
-                            onClick={this.sendMessage}>На просмотр
+                            component={'a'}
+                            href={'https://vk.me/id' + this.props.room.userId}>На просмотр
                     </Button>
                   )}
                 </div>
