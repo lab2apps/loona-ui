@@ -112,7 +112,7 @@ export class RoomBooking extends React.PureComponent<RoomDetailsProps> {
   confirmBooking = () => {
     RoomApiService.confirmBooking(this.props.room.uuid, this.state.startDate, this.state.endDate).then((data) => {
 
-      window._vk_pay_room = this.props.room.uuid;
+      window._vk_pay_room  = this.props.room.uuid;
       window._vk_pay_order = data.orderId;
 
       vkConnect.send("VKWebAppOpenPayForm", {
@@ -120,7 +120,9 @@ export class RoomBooking extends React.PureComponent<RoomDetailsProps> {
         "action": "pay-to-group",
         "params": {
           "amount": data.price,
-          "description": `Бронирование ${this.props.room.uuid}`,
+          "description": `Бронирование ${this.props.room.name} с ${this.state.startDate.format('DD MMM YYYY')} по ${
+            this.state.endDate.format('DD MMM YYYY')
+            }`,
           "group_id": data.receiverId,
           "extra": `${data.orderId}:${this.props.room.uuid}`,
         },
