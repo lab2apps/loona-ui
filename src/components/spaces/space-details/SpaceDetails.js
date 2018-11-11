@@ -49,7 +49,7 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
   };
 
   onMessageButtonClick = () => {
-    console.warn('NOT IMPLEMENTED');
+    this.props.history.push(`/my/send-message?spaceId=${ this.props.space.uuid }`);
   };
 
   componentDidMount () {
@@ -60,6 +60,10 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
 
   addToFavorites = () => {
 
+  };
+
+  sendMessage = () => {
+    window.location.replace('https://vk.com/im?sel=' + this.props.space.userId)
   };
 
   render () {
@@ -100,8 +104,16 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
 
                 // FOR OWNER ONLY
                 <div style={ { display: 'flex', paddingTop: '10px' } }>
-                  <Button size="l" stretched style={ { marginRight: 8 } }
-                          onClick={ this.onMessageButtonClick }>Сообщение</Button>
+
+                  {!this.props.space.mySpace && (  <Button size="l" stretched style={ { marginRight: 8 } }
+                                                          onClick={ this.sendMessage }>Связаться</Button>) }
+
+
+                  {this.props.space.mySpace && (  <Button size="l" stretched style={ { marginRight: 8 } }
+                                                          onClick={ this.onMessageButtonClick }>Рассылка</Button>) }
+
+
+
                   { this.props.space.mySpace ? (<Button size="l" stretched level="secondary"
                                                         onClick={ this.onEditButtonClick }>Редактировать</Button>) : (
                     <Button size="l" stretched level="secondary"
