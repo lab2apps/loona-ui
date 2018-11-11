@@ -17,6 +17,7 @@ import Icon28Notifications from '@vkontakte/icons/dist/28/notifications';
 import Icon28Menu from '@vkontakte/icons/dist/28/menu';
 
 import './main.scss';
+import { Notifications } from '../notifications/Notifications';
 
 @withRouter
 export class Main extends React.PureComponent {
@@ -123,7 +124,9 @@ export class Main extends React.PureComponent {
 
         <View id='/notifications'
               activePanel={ this.state.activePanel }>
-          <Panel id='/notifications'/>
+          <Panel id='/notifications'>
+            <Notifications />
+          </Panel>
         </View>
 
         <View id='/additional'

@@ -23,7 +23,7 @@ export class RoomListItem extends React.PureComponent<RoomListItemProps> {
 
   render () {
     return (
-      <Cell before={ <Avatar type={'app'} size={50} src={
+      <Cell before={ <Avatar type={'app'} size={48} src={
         this.props.room.imageUrls.length > 0 ? `${environment.apiUrl}/image/${this.props.room.imageUrls[0]}` : null
       }/> }
             onClick={ this.go }
