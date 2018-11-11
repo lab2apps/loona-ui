@@ -31,6 +31,13 @@ export class AllSpaces extends React.PureComponent {
     });
   };
 
+  mapSpaceToPoint (space) {
+    return {
+      name: space.name,
+      coords: [space.latitude,space.longitude]
+    }
+  }
+
   render () {
     return (
       <React.Fragment>
@@ -59,8 +66,7 @@ export class AllSpaces extends React.PureComponent {
           (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW) &&
           <React.Fragment>
             <div style={{ height: '100%', padding: '0 0 96px' }}>
-              <MapView>
-              </MapView>
+              <MapView points={ this.props.spaces.map(this.mapSpaceToPoint) }/>
             </div>
           </React.Fragment>
         }
