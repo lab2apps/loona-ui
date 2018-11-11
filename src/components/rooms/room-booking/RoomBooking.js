@@ -116,7 +116,7 @@ export class RoomBooking extends React.PureComponent<RoomDetailsProps> {
       window._vk_pay_order = data.orderId;
 
       vkConnect.send("VKWebAppOpenPayForm", {
-        "app_id": 6746619,
+        "app_id": 6741544,
         "action": "pay-to-group",
         "params": {
           "amount": data.price,

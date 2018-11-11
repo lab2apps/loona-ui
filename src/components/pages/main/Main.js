@@ -20,6 +20,7 @@ import './main.scss';
 import { SendMessage } from '../send-message/SendMessage';
 import { Filter } from '../filter/Filter';
 import { Notifications } from '../notifications/Notifications';
+import { Additional } from '../../additional/Additional';
 
 @withRouter
 export class Main extends React.PureComponent {
@@ -144,7 +145,9 @@ export class Main extends React.PureComponent {
 
         <View id='/additional'
               activePanel={this.state.activePanel}>
-          <Panel id='/additional'/>
+          <Panel id='/additional'>
+            <Additional/>
+          </Panel>
         </View>
       </Epic>
     );
