@@ -34,7 +34,7 @@ export class MySpaces extends React.PureComponent {
 
         <div style={ { padding: '0 0 96px' } }>
           {
-            (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.SUBSCRIPTIONS) &&
+            (!this.props.my) &&
             <React.Fragment>
               <SpacesList spaces={ this.props.spaces.filter(space => !space.mySpace) }>
               </SpacesList>
@@ -42,7 +42,7 @@ export class MySpaces extends React.PureComponent {
           }
 
           {
-            (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MY_SPACES) &&
+            (this.props.my) &&
             <React.Fragment>
               <List>
                 <Cell>
@@ -70,17 +70,17 @@ export class MySpaces extends React.PureComponent {
           <Tabs>
             <TabsItem
               onClick={ () => {
-                this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.SUBSCRIPTIONS });
+                this.props.history.push('/my');
               } }
-              selected={ this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.SUBSCRIPTIONS }>
+              selected={ !this.props.my }>
               Подписки
             </TabsItem>
 
             <TabsItem
               onClick={ () => {
-                this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.MY_SPACES });
+                this.props.history.push('/my?my=true');
               } }
-              selected={ this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MY_SPACES }>
+              selected={ this.props.my }>
               Созданные мной
             </TabsItem>
           </Tabs>

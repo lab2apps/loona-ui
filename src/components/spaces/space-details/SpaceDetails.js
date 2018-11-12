@@ -181,7 +181,7 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
               (this.state.selectedTab === SPACE_DETAILS_TABS.ALL_ROOMS) &&
 
               <React.Fragment>
-                {this.props.rooms.rooms && this.props.rooms.rooms.length === 0 && (
+                {!this.props.rooms.fetching && this.props.rooms.rooms && this.props.rooms.rooms.length === 0 && (
                   <Cell multiline={true}
                         style={{ textAlign: 'center' }}>
                     На этой площадке пока пусто :(
@@ -193,7 +193,7 @@ export class SpaceDetails extends React.PureComponent<SpaceDetailsProps> {
                   </Cell>
                 )}
 
-                {this.props.rooms.rooms && <RoomsList rooms={this.props.rooms.rooms}/>}
+                {!this.props.rooms.fetching && this.props.rooms.rooms && <RoomsList rooms={this.props.rooms.rooms}/>}
 
                 {this.props.space.mySpace && (
                   <Cell>

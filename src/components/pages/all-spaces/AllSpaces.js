@@ -52,7 +52,7 @@ export class AllSpaces extends React.PureComponent {
             <Search
               onChange={debounce(this.onQueryChange, 300)}
               className={
-                (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW) ? 'l-search--bg-transparent' : ''
+                this.props.map ? 'l-search--bg-transparent' : ''
               }/>
             <Icon24Filter className={'l-filter-search'} onClick={this.props.showFilters}/>
           </React.Fragment>
@@ -60,7 +60,7 @@ export class AllSpaces extends React.PureComponent {
 
 
         {
-          (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.LIST_VIEW) &&
+          !this.props.map &&
           <div style={{ padding: '60px 0 96px' }}>
             <SpacesList spaces={this.props.spaces}>
             </SpacesList>
@@ -68,7 +68,7 @@ export class AllSpaces extends React.PureComponent {
         }
 
         {
-          (this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW) &&
+          this.props.map &&
           <React.Fragment>
             <div style={{ height: '100%', padding: '0 0 96px' }}>
               <MapView points={this.props.spaces.map(this.mapSpaceToPoint)}/>
@@ -80,16 +80,16 @@ export class AllSpaces extends React.PureComponent {
           <Tabs>
             <TabsItem
               onClick={() => {
-                this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.LIST_VIEW });
+                this.props.history.push('/all')
               }}
-              selected={this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.LIST_VIEW}>
+              selected={!this.props.map}>
               Списком
             </TabsItem>
             <TabsItem
               onClick={() => {
-                this.setState({ selectedSpacesViewType: SPACES_VIEW_TYPES.MAP_VIEW });
+                this.props.history.push('/all?map=true')
               }}
-              selected={this.state.selectedSpacesViewType === SPACES_VIEW_TYPES.MAP_VIEW}>
+              selected={this.props.map}>
               На карте
             </TabsItem>
           </Tabs>

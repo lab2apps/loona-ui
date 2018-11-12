@@ -16,6 +16,7 @@ export const roomsReducer = (state = initialState, action) => {
       return {
         ...state,
         fetching: true,
+        rooms: [],
       };
     }
 

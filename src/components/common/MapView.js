@@ -62,7 +62,14 @@ export class MapView extends React.PureComponent<MavViewProps> {
         <YMapsContainer version="2.1">
           <YMap defaultState={this.state.mapOptions} instanceRef={this.mapRef} width="100%" height="100%">
             {
-              this.props.points.map((point, i) => <Placemark geometry={point.coords} key={i} onClick={() => {
+              this.props.points.map((point) => <Placemark geometry={point.coords}
+                                                          properties={{
+                                                            iconContent: point.name,
+                                                          }}
+                                                          options={{
+                                                            preset: 'islands#blackStretchyIcon'
+                                                          }}
+                                                          key={point.id} onClick={() => {
                 this.props.history.push('/all/space-details?id=' + point.id);
               }}/>)
             }

@@ -2,6 +2,7 @@ import React from 'react';
 
 import { View, Panel, Epic, Tabbar, TabbarItem, ActionSheet, ActionSheetItem } from '@vkontakte/vkui';
 import { withRouter } from 'react-router-dom';
+import queryString from 'query-string';
 
 import { EditSpace } from '../edit-space/EditSpace';
 import { Room } from '../room/Room';
@@ -59,6 +60,8 @@ export class Main extends React.PureComponent {
   render () {
     const hasTabbar = !['/my/edit-space', '/my/edit-room', '/my/book-room'].includes(this.state.activePanel);
 
+    const { map, my } = queryString.parse(this.props.location.search);
+
     return (
       <Epic activeStory={this.state.activeStory}
             tabbar={
@@ -91,9 +94,11 @@ export class Main extends React.PureComponent {
               }}/>}
               activePanel={this.state.activePanel}>
           <Panel id='/all' className="l-panel--full-height">
-            <AllSpaces showFilters={() => {
-              this.setState({ showFilters: true })
-            }}/>
+            <AllSpaces
+              map={map}
+              showFilters={() => {
+                this.setState({ showFilters: true })
+              }}/>
           </Panel>
 
           <Panel id='/all/space-details'>
@@ -108,7 +113,7 @@ export class Main extends React.PureComponent {
         <View id='/my'
               activePanel={this.state.activePanel}>
           <Panel id='/my' className="l-panel--full-height">
-            <MySpaces/>
+            <MySpaces my={my}/>
           </Panel>
 
           <Panel id='/my/space-details'>
@@ -137,9 +142,9 @@ export class Main extends React.PureComponent {
         </View>
 
         <View id='/notifications'
-              activePanel={ this.state.activePanel }>
+              activePanel={this.state.activePanel}>
           <Panel id='/notifications'>
-            <Notifications />
+            <Notifications/>
           </Panel>
         </View>
 
